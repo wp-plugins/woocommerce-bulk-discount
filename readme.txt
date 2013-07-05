@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, discount
 Requires at least: 3.5.0
 Tested up to: 3.5.2
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,10 +63,16 @@ Currently 5 discount lines are supported. That should be enough for reasonable f
 
 == Changelog ==
 
+= 1.0.1 =
+* (5 Jul 2013) cleaned up some code.
+
 = 1.0 =
 * Stable version.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+This version has minor change in code without any noticeable impact.
 
 = 1.0 =
 N/A.
