@@ -1,0 +1,13 @@
+span.discount_price_info span {
+    color: red;
+    text-decoration: line-through;
+    margin-right: 4px;
+}
+
+.cart-show-discounts {
+    margin: 5px 0;
+}
+
+.productinfo-show-discounts {
+    margin: 5px 0;
+}
