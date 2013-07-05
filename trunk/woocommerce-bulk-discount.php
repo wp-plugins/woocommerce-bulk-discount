@@ -10,7 +10,21 @@ Author URI: http://www.renepuchinger.com
 
 class Woo_Bulk_Discount_Plugin {
 
-    public function install_plugin() {
+    public function __construct() {
+        if (get_option('woocommerce_t4m_enable_bulk_discounts') == 'yes') {
+            add_action('woocommerce_before_calculate_totals', array($this, 'action_before_calculate'));
+            add_action('woocommerce_calculate_total', array($this, 'action_after_calculate'));
+            add_action('woocommerce_before_cart_table', array($this, 'before_cart_table'));
+            add_action('woocommerce_single_product_summary', array($this, 'single_product_summary'), 45);
+            add_filter('woocommerce_cart_item_price_html', array($this, 'filter_item_price'), 10, 2);
+            add_filter('woocommerce_product_write_panel_tabs', array($this, 'action_product_write_panel_tabs'));
+            add_filter('woocommerce_product_write_panels', array($this, 'action_product_write_panels'));
+            add_action('woocommerce_process_product_meta', array($this, 'action_process_meta'));
+        }
+
+        add_filter('woocommerce_general_settings', array($this, 'action_general_settings'));
+        add_action('admin_enqueue_scripts', array($this, 'action_enqueue_dependencies_admin'));
+        add_action('wp_head', array($this, 'action_enqueue_dependencies'));
     }
 
     private function get_discounted_coeff($prodId, $price, $quantity) {
@@ -187,19 +201,3 @@ class Woo_Bulk_Discount_Plugin {
 }
 
 $woo_bulk_discount_plugin = new Woo_Bulk_Discount_Plugin();
-register_activation_hook(__FILE__, array($woo_bulk_discount_plugin, 'install_plugin'));
-
-if (get_option('woocommerce_t4m_enable_bulk_discounts') == 'yes') {
-    add_action('woocommerce_before_calculate_totals', array($woo_bulk_discount_plugin, 'action_before_calculate'));
-    add_action('woocommerce_calculate_total', array($woo_bulk_discount_plugin, 'action_after_calculate'));
-    add_action('woocommerce_before_cart_table', array($woo_bulk_discount_plugin, 'before_cart_table'));
-    add_action('woocommerce_single_product_summary', array($woo_bulk_discount_plugin, 'single_product_summary'), 45);
-    add_filter('woocommerce_cart_item_price_html', array($woo_bulk_discount_plugin, 'filter_item_price'), 10, 2);
-    add_filter('woocommerce_product_write_panel_tabs', array($woo_bulk_discount_plugin, 'action_product_write_panel_tabs'));
-    add_filter('woocommerce_product_write_panels', array($woo_bulk_discount_plugin, 'action_product_write_panels'));
-    add_action('woocommerce_process_product_meta', array($woo_bulk_discount_plugin, 'action_process_meta'));
-}
-
-add_filter('woocommerce_general_settings', array($woo_bulk_discount_plugin, 'action_general_settings'));
-add_action('admin_enqueue_scripts', array($woo_bulk_discount_plugin, 'action_enqueue_dependencies_admin'));
-add_action('wp_head', array($woo_bulk_discount_plugin, 'action_enqueue_dependencies'));
