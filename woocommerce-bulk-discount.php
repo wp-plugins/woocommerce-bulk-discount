@@ -4,22 +4,42 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained discounts to items in the shopping cart, dependently on ordered quantity and on concrete product.
 Author: Rene Puchinger
-Version: 1.0.1
+Version: 1.1
 Author URI: http://www.renepuchinger.com
+License: GPL3
 */
 
-class Woo_Bulk_Discount_Plugin {
+
+class Woo_Bulk_Discount_Plugin_t4m {
+
+    /*
+    Copyright (C) 2013  Rene Puchinger
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    */
 
     public function __construct() {
         if (get_option('woocommerce_t4m_enable_bulk_discounts') == 'yes') {
-            add_action('woocommerce_before_calculate_totals', array($this, 'action_before_calculate'));
-            add_action('woocommerce_calculate_total', array($this, 'action_after_calculate'));
+            add_action('woocommerce_before_calculate_totals', array($this, 'action_before_calculate'), 10, 1);
+            add_action('woocommerce_calculate_totals', array($this, 'action_after_calculate'), 10, 1);
             add_action('woocommerce_before_cart_table', array($this, 'before_cart_table'));
             add_action('woocommerce_single_product_summary', array($this, 'single_product_summary'), 45);
             add_filter('woocommerce_cart_item_price_html', array($this, 'filter_item_price'), 10, 2);
             add_filter('woocommerce_product_write_panel_tabs', array($this, 'action_product_write_panel_tabs'));
             add_filter('woocommerce_product_write_panels', array($this, 'action_product_write_panels'));
             add_action('woocommerce_process_product_meta', array($this, 'action_process_meta'));
+            add_filter('woocommerce_cart_product_subtotal', array($this, 'filter_cart_product_subtotal'), 10, 3);
         }
 
         add_filter('woocommerce_general_settings', array($this, 'action_general_settings'));
@@ -27,7 +47,7 @@ class Woo_Bulk_Discount_Plugin {
         add_action('wp_head', array($this, 'action_enqueue_dependencies'));
     }
 
-    private function get_discounted_coeff($prodId, $price, $quantity) {
+    protected function get_discounted_coeff($prodId, $price, $quantity) {
         $q = array(0.0);
         $d = array(0.0);
         for ($i = 1; $i <= 5; $i++) {
@@ -44,13 +64,12 @@ class Woo_Bulk_Discount_Plugin {
     public function filter_item_price($price, $values) {
         $_product = $values['data'];
         $coeff = $this->get_discounted_coeff($_product->id, $_product->get_price(), $values['quantity']);
-        $orig_price = $_product->get_price() / $coeff;
-        $discount_info = ($coeff < 1.0) ? woocommerce_price($orig_price) : "";
-        return "<span class='discount_price_info'><span>$discount_info</span></span>$price";
-    }
+        $oldprice = ($coeff < 1.0) ? woocommerce_price($_product->get_price()) : "";
+        $discprice = woocommerce_price($_product->get_price() * $coeff);
+        return "<span class='discount_price_info'><span>$oldprice</span></span>$discprice";
+     }
 
     public function action_before_calculate(WC_Cart $cart) {
-        $_SESSION['woocommerce_discount_cart'] = $cart;
         if ( sizeof( $cart->cart_contents ) > 0) {
             foreach ( $cart->cart_contents as $cart_item_key => $values ) {
                 $_product = $values['data'];
@@ -60,12 +79,12 @@ class Woo_Bulk_Discount_Plugin {
         }
     }
 
-    public function action_after_calculate() {
-        $cart = $_SESSION['woocommerce_discount_cart'];
+    public function action_after_calculate(WC_Cart $cart) {
         if ( sizeof( $cart->cart_contents ) > 0) {
             foreach ( $cart->cart_contents as $cart_item_key => $values ) {
                 $_product = $values['data'];
-                $row_base_price = $_product->get_price() / $this->get_discounted_coeff($_product->id, $_product->get_price(), $values['quantity']);
+                $coeff = $this->get_discounted_coeff($_product->id, $_product->get_price(), $values['quantity']);
+                $row_base_price = $_product->get_price() / $coeff;
                 $values['data']->set_price($row_base_price);
             }
         }
@@ -75,6 +94,12 @@ class Woo_Bulk_Discount_Plugin {
         echo "<div class='cart-show-discounts'>";
         echo get_option('woocommerce_t4m_cart_info');
         echo "</div>";
+    }
+
+    public function filter_cart_product_subtotal($subtotal, $_product, $quantity) {
+        $coeff = $this->get_discounted_coeff($_product->id, $_product->get_price(), $quantity);
+        $newsubtotal = woocommerce_price($_product->get_price() * $quantity * $coeff);
+        return $newsubtotal;
     }
 
     public function single_product_summary() {
@@ -178,9 +203,9 @@ class Woo_Bulk_Discount_Plugin {
     }
 
     public function action_general_settings($settings) {
-        array_push ($settings, array(	'name' => __( 'Bulk Discounts', 'woocommerce' ), 'type' => 'title','desc' => __('The following options are specific to product bulk discounts.', 'woocommerce'), 'id' => 't4m_bulk_discounts_options' ));
+        array_push ($settings, array(	'name' => 'Bulk Discounts', 'type' => 'title','desc' => 'The following options are specific to product bulk discounts.', 'id' => 't4m_bulk_discounts_options' ));
         array_push ($settings, array(
-                'name' => __('Bulk discounts globally enabled', 'woocommerce'),
+                'name' => 'Bulk discounts globally enabled',
                 'id' 		=> 'woocommerce_t4m_enable_bulk_discounts',
                 'desc' => 'Enable bulk discounts',
                 'std' 		=> 'yes',
@@ -188,7 +213,7 @@ class Woo_Bulk_Discount_Plugin {
             )
         );
         array_push ($settings, array(
-                'name' => __('Optionally enter information about discounts visible on cart page', 'woocommerce'),
+                'name' => 'Optionally enter information about discounts visible on cart page',
                 'id' 		=> 'woocommerce_t4m_cart_info',
                 'type' 		=> 'textarea',
                 'css' 		=> 'width:100%; height: 75px;'
@@ -200,4 +225,4 @@ class Woo_Bulk_Discount_Plugin {
 
 }
 
-$woo_bulk_discount_plugin = new Woo_Bulk_Discount_Plugin();
+$woo_bulk_discount_plugin = new Woo_Bulk_Discount_Plugin_t4m();
