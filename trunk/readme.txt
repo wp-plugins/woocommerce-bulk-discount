@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, discount
 Requires at least: 3.5.0
 Tested up to: 3.5.2
-Stable tag: 1.0.1
+Stable tag: 1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,7 +14,9 @@ Apply fine-grained discounts to items in the shopping cart, dependently on order
 
 WooCommerce Bulk Discount Plugin makes possible to apply fine-grained discounts
 to items in the shopping cart, dependently on ordered quantity and on concrete
-product. The plugin was tested with WooCommerce versions 1.6.4 to 2.0.12.
+product.
+
+The plugin works with WooCommerce versions 2.0.x.
 
 Let us examine some examples of usage.
 
@@ -52,9 +54,10 @@ add up to five discount lines to fine-tune the discount setting.
 
 == Frequently Asked Questions ==
 
-= How many levels of discounting may be applied? =
+= Are multiple discounts supported? How many levels of discounting may be applied? =
 
-Currently 5 discount lines are supported. That should be enough for reasonable fine-tuning of the discount.
+Yes, multiple discounts (related to single product) are supported. Currently one may set up
+to 5 discount lines. That should be enough for reasonable fine-tuning of the discount.
 
 == Screenshots ==
 
@@ -62,6 +65,11 @@ Currently 5 discount lines are supported. That should be enough for reasonable f
 2. Setting the discount lines. Often only one line is sufficient.
 
 == Changelog ==
+
+= 1.1 =
+* (7 Jul 2013) resolved major issue of incorrect discount application in some cases.
+* fixed possible security issue.
+* cleaned up some code.
 
 = 1.0.1 =
 * (5 Jul 2013) cleaned up some code.
@@ -72,6 +80,9 @@ Currently 5 discount lines are supported. That should be enough for reasonable f
 == Upgrade Notice ==
 
 = 1.0.1 =
+There are major code changes. Upgrading recommended as soon as possible.
+
+= 1.0.1 =
 This version has minor change in code without any noticeable impact.
 
 = 1.0 =
@@ -79,7 +90,7 @@ N/A.
 
 == Example of setting a discount ==
 
-Below is an example with three discount lines. 
+Below is an example of setting a multiple discount for some product with three discount lines. 
 
 Example:
 
