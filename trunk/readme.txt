@@ -79,8 +79,8 @@ to 5 discount lines. That should be enough for reasonable fine-tuning of the dis
 
 == Upgrade Notice ==
 
-= 1.0.1 =
-There are major code changes. Upgrading recommended as soon as possible.
+= 1.1 =
+Important bugfix release. Upgrading recommended as soon as possible.
 
 = 1.0.1 =
 This version has minor change in code without any noticeable impact.
