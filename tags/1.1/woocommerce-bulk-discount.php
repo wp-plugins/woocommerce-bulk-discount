@@ -9,6 +9,7 @@ Author URI: http://www.renepuchinger.com
 License: GPL3
 */
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Woo_Bulk_Discount_Plugin_t4m {
 
