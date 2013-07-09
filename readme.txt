@@ -68,7 +68,7 @@ to 5 discount lines. That should be enough for reasonable fine-tuning of the dis
 
 = 1.1 =
 * (7 Jul 2013) resolved major issue of incorrect discount application in some cases.
-* fixed possible security issue.
+* code optimization.
 * cleaned up some code.
 
 = 1.0.1 =
