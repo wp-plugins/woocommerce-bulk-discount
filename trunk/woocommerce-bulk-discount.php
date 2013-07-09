@@ -11,6 +11,8 @@ License: GPL3
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) return; // Check if WooCommerce is active
+
 class Woo_Bulk_Discount_Plugin_t4m {
 
     /*
