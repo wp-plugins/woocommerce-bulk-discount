@@ -3,8 +3,8 @@ Contributors: Rene Puchinger
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6VEQ8XXK6B3UE
 Tags: woocommerce, discount
 Requires at least: 3.5.0
-Tested up to: 3.5.2
-Stable tag: 1.1
+Tested up to: 3.6
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -61,14 +61,20 @@ to 5 discount lines. That should be enough for reasonable fine-tuning of the dis
 
 == Screenshots ==
 
-1. Enabling the plugin and setting information about discounts policy
+1. Enabling the plugin and setting information about discounts policy.
 2. Setting the discount lines. Often only one line is sufficient.
 
 == Changelog ==
 
+= 1.1.1 =
+* (21 Aug 2013) Plugin settings moved to separate tab under WooCommerce > Settings.
+* CSS refined.
+* code cleanup.
+* more code comments added.
+
 = 1.1 =
 * (7 Jul 2013) resolved major issue of incorrect discount application in some cases.
-* fixed possible security issue.
+* code optimization.
 * cleaned up some code.
 
 = 1.0.1 =
@@ -78,6 +84,9 @@ to 5 discount lines. That should be enough for reasonable fine-tuning of the dis
 * Stable version.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Maintenance release.
 
 = 1.1 =
 Important bugfix release. Upgrading recommended as soon as possible.
