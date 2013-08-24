@@ -60,7 +60,7 @@ add up to five discount lines to fine-tune the discount setting.
 Yes, multiple discounts (related to single product) are supported. Currently one may set up
 to 5 discount lines. That should be enough for reasonable fine-tuning of the discount.
 
-== Is it possible to handle discount for product variations as a whole?
+= Is it possible to handle discount for product variations as a whole? =
 Yes, in case you have several product variations in your store and you need to apply discount
 to all the purchased variations, please upgrade to version 1.2 (or newer) of this plugin.
 This behaviour can be disabled in Bulk Discount settings.
