@@ -3,8 +3,8 @@ Contributors: Rene Puchinger
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6VEQ8XXK6B3UE
 Tags: woocommerce, discount
 Requires at least: 3.5.0
-Tested up to: 3.5.2
-Stable tag: 1.1
+Tested up to: 3.6
+Stable tag: 1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,11 +38,12 @@ policies to be adopted across your store.
 
 Once the plugin is activated, you can use it as follows:
 
-1. First navigate to WooCommerce settings. Under General tab, find the global
-configuration for bulk discounts. Check "Enable discounts" and optionally fill
-information about discounts which will be visible on cart page. You can include HTML
+1. First navigate to WooCommerce settings. Under the Bulk Discount tab, find the global
+configuration for bulk discounts. Make sure "Bulk Discount enabled" is checked and optionally
+fill information about discounts which will be visible on cart page. You can include HTML
 markup in the text - you can, for instance, include a link to your page with discount
-policy. Save the settings.
+policy. In case you need the plugin to work well with product variations, make sure that the
+"Treat product variations separately" option is unchecked. Save the settings.
 
 2. Navigate to Products and choose a product for which you want to create discount policy.
 In Product Data panel, click Bulk Dicounts and optionally fill information about discount
@@ -59,16 +60,32 @@ add up to five discount lines to fine-tune the discount setting.
 Yes, multiple discounts (related to single product) are supported. Currently one may set up
 to 5 discount lines. That should be enough for reasonable fine-tuning of the discount.
 
+== Is it possible to handle discount for product variations as a whole?
+Yes, in case you have several product variations in your store and you need to apply discount
+to all the purchased variations, please upgrade to version 1.2 (or newer) of this plugin.
+This behaviour can be disabled in Bulk Discount settings.
+
 == Screenshots ==
 
-1. Enabling the plugin and setting information about discounts policy
+1. Enabling the plugin and setting information about discounts policy.
 2. Setting the discount lines. Often only one line is sufficient.
 
 == Changelog ==
 
+= 1.2 =
+* (24 Aug 2013) Possibility to treat product variations as a whole when discounting.
+* CSS changes.
+* Show the applied discount in percents on hovering the item price in the cart.
+
+= 1.1.1 =
+* (21 Aug 2013) Plugin settings moved to separate tab under WooCommerce > Settings.
+* CSS refined.
+* code cleanup.
+* more code comments added.
+
 = 1.1 =
 * (7 Jul 2013) resolved major issue of incorrect discount application in some cases.
-* fixed possible security issue.
+* code optimization.
 * cleaned up some code.
 
 = 1.0.1 =
@@ -78,6 +95,12 @@ to 5 discount lines. That should be enough for reasonable fine-tuning of the dis
 * Stable version.
 
 == Upgrade Notice ==
+
+= 1.2 =
+Release with new features.
+
+= 1.1.1 =
+Maintenance release.
 
 = 1.1 =
 Important bugfix release. Upgrading recommended as soon as possible.
