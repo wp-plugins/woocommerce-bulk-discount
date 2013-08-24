@@ -1,7 +1,12 @@
-span.discount_price_info span {
-    color: red;
+span.discount-info .old-price {
+    color: #777;
     text-decoration: line-through;
     margin-right: 4px;
+}
+
+span.discount-info .new-price {
+    color: #4AB915;
+    font-weight: bold;
 }
 
 .cart-show-discounts {
