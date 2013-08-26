@@ -1,10 +1,5 @@
 #woocommerce-product-data ul.product_data_tabs li.bulkdiscount_options a {
-    line-height: 16px;
-    border-bottom: 1px solid #d5d5d5;
-    text-shadow: 0 1px 1px #fff;
-    color: #555;
-    background: #f1f1f1 no-repeat 9px 9px;
-    width: auto !important;
+    padding: 5px 5px 5px 28px;
 }
 
 #bulkdiscount_product_data a.button-secondary {
