@@ -2,9 +2,9 @@
 /*
 Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
-Description: Apply fine-grained discounts to items in the shopping cart, dependently on ordered quantity and on concrete product.
+Description: Apply fine-grained bulk discounts to items in the shopping cart, dependently on ordered quantity and on concrete product.
 Author: Rene Puchinger
-Version: 1.2
+Version: 1.2.1
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -39,6 +39,8 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 
         public function __construct()
         {
+
+            load_plugin_textdomain('wc_bulk_discount', false, dirname(plugin_basename(__FILE__)) . '/lang/');
 
             $this->current_tab = (isset($_GET['tab'])) ? $_GET['tab'] : 'general';
 
@@ -109,8 +111,8 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             global $woocommerce;
             $_product = $values['data'];
             if (empty($this->discount_coeffs) || !isset($this->discount_coeffs[$this->get_actual_id($_product)])
-                || !isset($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']) || !isset($this->discount_coeffs[$this->get_actual_id($_product)]['coeff']))
-            {
+                || !isset($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']) || !isset($this->discount_coeffs[$this->get_actual_id($_product)]['coeff'])
+            ) {
                 $this->gather_discount_coeffs();
             }
             $coeff = $this->discount_coeffs[$this->get_actual_id($_product)]['coeff'];
@@ -119,13 +121,14 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             }
             $discprice = woocommerce_price($_product->get_price() * $coeff);
             $oldprice = woocommerce_price($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']);
-            return "<span class='discount-info' title='".sprintf(__('Eligible for %d%% discount!', 'wc_bulk_discount'),  round((1 - $coeff) * 100 ))."'><span class='old-price'>$oldprice</span><span class='new-price'>$discprice</span></span>";
+            return "<span class='discount-info' title='" . sprintf(__('%d%% bulk discount applied!', 'wc_bulk_discount'), round((1 - $coeff) * 100)) . "'><span class='old-price'>$oldprice</span><span class='new-price'>$discprice</span></span>";
         }
 
         /**
          * Gather discount information to the array $this->discount_coefs
          */
-        protected function gather_discount_coeffs() {
+        protected function gather_discount_coeffs()
+        {
             global $woocommerce;
             $cart = $woocommerce->cart;
             $this->discount_coeffs = array();
@@ -165,12 +168,13 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 foreach ($cart->cart_contents as $cart_item_key => $values) {
                     $_product = $values['data'];
                     $row_base_price = $_product->get_price() * $this->discount_coeffs[$this->get_actual_id($_product)]['coeff'];
-                    $values['data']->set_price($row_base_price); // TODO SETPRICE
+                    $values['data']->set_price($row_base_price);
                 }
             }
         }
 
-        protected function get_actual_id($product) {
+        protected function get_actual_id($product)
+        {
             if ($product instanceof WC_Product_Variation) {
                 return $product->variation_id;
             } else {
@@ -188,7 +192,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             if (sizeof($cart->cart_contents) > 0) {
                 foreach ($cart->cart_contents as $cart_item_key => $values) {
                     $_product = $values['data'];
-                    $values['data']->set_price($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']); // TODO SETPRICE
+                    $values['data']->set_price($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']);
                 }
             }
         }
@@ -236,7 +240,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
          */
         public function action_product_write_panel_tabs()
         {
-            echo '<li class="bulkdiscount_tab bulkdiscount_options"><a href="#bulkdiscount_product_data">Bulk Discount</a></li>';
+            echo '<li class="bulkdiscount_tab bulkdiscount_options"><a href="#bulkdiscount_product_data">' . __('Bulk Discount', 'wc_bulk_discount') . '</a></li>';
         }
 
         /**
@@ -282,7 +286,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 
                 <div class="options_group">
                     <?php
-                    woocommerce_wp_textarea_input(array('id' => "_bulkdiscount_text_info", 'label' => 'Bulk discount info in product description', 'description' => 'Optionally enter bulk discount information that will be visible on the product page.', 'desc_tip' => 'yes', 'class' => 'fullWidth'));
+                    woocommerce_wp_textarea_input(array('id' => "_bulkdiscount_text_info", 'label' => __('Bulk discount info in product description', 'wc_bulk_discount'), 'description' => __('Optionally enter bulk discount information that will be visible on the product page.', 'wc_bulk_discount'), 'desc_tip' => 'yes', 'class' => 'fullWidth'));
                     ?>
                 </div>
 
@@ -296,8 +300,8 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 
                         <div class="block<?php echo $i; ?>">
                             <?php
-                            woocommerce_wp_text_input(array('id' => "_bulkdiscount_quantity_$i", 'label' => __('Quantity (min.)', 'woobulkdiscount'), 'description' => __('Enter up minimal quantity for which the discount applies.', 'woocommerce')));
-                            woocommerce_wp_text_input(array('id' => "_bulkdiscount_discount_$i", 'label' => __('Discount (%)', 'woobulkdiscount'), 'description' => __('Enter the discount in percents (Allowed values: 0 to 100).', 'woocommerce')));
+                            woocommerce_wp_text_input(array('id' => "_bulkdiscount_quantity_$i", 'label' => __('Quantity (min.)', 'wc_bulk_discount'), 'description' => __('Enter up minimal quantity for which the discount applies.', 'wc_bulk_discount')));
+                            woocommerce_wp_text_input(array('id' => "_bulkdiscount_discount_$i", 'label' => __('Discount (%)', 'wc_bulk_discount'), 'description' => __('Enter the discount in percents (Allowed values: 0 to 100).', 'wc_bulk_discount')));
                             ?>
                         </div>
                     </div>
@@ -318,7 +322,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
          */
         public function action_enqueue_dependencies()
         {
-            wp_register_style('woocommercebulkdiscount-style', plugins_url('style.css', __FILE__));
+            wp_register_style('woocommercebulkdiscount-style', plugins_url('css/style.css', __FILE__));
             wp_enqueue_style('woocommercebulkdiscount-style');
             wp_enqueue_script('jquery');
         }
@@ -328,7 +332,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
          */
         public function action_enqueue_dependencies_admin()
         {
-            wp_register_style('woocommercebulkdiscount-style-admin', plugins_url('admin.css', __FILE__));
+            wp_register_style('woocommercebulkdiscount-style-admin', plugins_url('css/admin.css', __FILE__));
             wp_enqueue_style('woocommercebulkdiscount-style-admin');
             wp_enqueue_script('jquery');
         }
@@ -427,7 +431,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             // Define settings
             $this->fields['bulk_discount'] = apply_filters('woocommerce_bulk_discount_settings_fields', array(
 
-                array('name' => __('Bulk Discount', 'wc_bulk_discount'), 'type' => 'title', 'desc' => __('The following options are specific to product bulk discount. <br /><br/><strong><i>After changing the settings, it is recommended to clear all sessions in WooCommerce &gt; System Status &gt; Tools.</i></strong>', 'wc_bulk_discount'), 'id' => 't4m_bulk_discounts_options'),
+                array('name' => __('Bulk Discount', 'wc_bulk_discount'), 'type' => 'title', 'desc' => __('The following options are specific to product bulk discount.', 'wc_bulk_discount') . '<br /><br/><strong><i>' . __('After changing the settings, it is recommended to clear all sessions in WooCommerce &gt; System Status &gt; Tools.', 'wc_bulk_discount') . '</i></strong>', 'id' => 't4m_bulk_discounts_options'),
 
                 array(
                     'name' => __('Bulk Discount enabled', 'wc_bulk_discount'),
