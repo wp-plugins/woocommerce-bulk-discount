@@ -4,19 +4,19 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, discount
 Requires at least: 3.5.0
 Tested up to: 3.6
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Apply fine-grained discounts to items in the shopping cart, dependently on ordered quantity and on concrete product.
+Apply fine-grained bulk discounts to items in the shopping cart, dependently on ordered quantity and on concrete product.
 
 == Description ==
 
-WooCommerce Bulk Discount Plugin makes possible to apply fine-grained discounts
+WooCommerce Bulk Discount Plugin makes possible to apply fine-grained bulk discounts
 to items in the shopping cart, dependently on ordered quantity and on concrete
 product.
 
-The plugin works with WooCommerce versions 2.0.x.
+The plugin is designed for WooCommerce versions 2.0.x.
 
 Let us examine some examples of usage.
 
@@ -65,12 +65,19 @@ Yes, in case you have several product variations in your store and you need to a
 to all the purchased variations, please upgrade to version 1.2 (or newer) of this plugin.
 This behaviour can be disabled in Bulk Discount settings.
 
+= Is the plugin i18n ready? =
+Yes, the plugin supports localization files. Currently English and Czech locales are
+implemented. You can add support for your language as well.
+
 == Screenshots ==
 
 1. Enabling the plugin and setting information about discounts policy.
 2. Setting the discount lines. Often only one line is sufficient.
 
 == Changelog ==
+
+= 1.2.1 =
+* (26 Aug 2013) Making the plugin i18n ready, currently there are English and Czech locales.
 
 = 1.2 =
 * (24 Aug 2013) Possibility to treat product variations as a whole when discounting.
@@ -95,6 +102,9 @@ This behaviour can be disabled in Bulk Discount settings.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Release with i18n feature.
 
 = 1.2 =
 Release with new features.
