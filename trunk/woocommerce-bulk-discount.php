@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart, dependently on ordered quantity and on concrete product.
 Author: Rene Puchinger
-Version: 1.2.1
+Version: 1.2.2
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -136,7 +136,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 foreach ($cart->cart_contents as $cart_item_key => $values) {
                     $_product = $values['data'];
                     $quantity = 0;
-                    if (get_option('woocommerce_t4m_variations_separate', 'no') == 'no' && $_product instanceof WC_Product_Variation && $_product->parent) {
+                    if (get_option('woocommerce_t4m_variations_separate', 'yes') == 'no' && $_product instanceof WC_Product_Variation && $_product->parent) {
                         $parent = $_product->parent;
                         foreach ($cart->cart_contents as $valuesInner) {
                             $p = $valuesInner['data'];
@@ -448,7 +448,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                     'desc' => __('You need to have this option unchecked to handle discounts on product variations as a whole.', 'wc_bulk_discount'),
                     'std' => 'yes',
                     'type' => 'checkbox',
-                    'default' => 'no'
+                    'default' => 'yes'
                 ),
 
                 array(
