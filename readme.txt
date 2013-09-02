@@ -1,10 +1,10 @@
 === WooCommerce Bulk Discount ===
 Contributors: Rene Puchinger
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6VEQ8XXK6B3UE
-Tags: woocommerce, discount
+Tags: woocommerce, bulk, discount
 Requires at least: 3.5.0
 Tested up to: 3.6
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -76,6 +76,9 @@ implemented. You can add support for your language as well.
 
 == Changelog ==
 
+= 1.2.2 =
+* (2 Sep 2013) Changing default state of product variation setting checkbox for default behaviour of previous versions.
+
 = 1.2.1 =
 * (26 Aug 2013) Making the plugin i18n ready, currently there are English and Czech locales.
 
@@ -102,6 +105,9 @@ implemented. You can add support for your language as well.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+Maintenance release
 
 = 1.2.1 =
 Release with i18n feature.
