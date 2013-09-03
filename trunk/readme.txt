@@ -131,7 +131,7 @@ Setting bulk discounts couldn't have been easier.
 == Changelog ==
 
 = 2.0.1 =
-* (3 Sep 2013) Added a warning for changing discount type on a site with existing orders (currently it is safe to change discount type only on fresh WooCommerce installation with no orders).
+* (3 Sep 2013) Added a warning for changing discount type on a site with existing orders (currently it is safe to change discount type only for the first time after installing the plugin or on fresh WooCommerce installation with no orders).
 
 = 2.0 =
 * (3 Sep 2013) Possibility of setting a flat (fixed) discount in currency units.
