@@ -37,6 +37,7 @@ The settings for discounts are simple yet extensive, allowing wide range of disc
 policies to be adopted in your store.
 
 Here is the list of main features:
+
 *   Possibility of setting percentage bulk discount or flat (fixed) bulk discount.
 *   Possibility of setting a flat (fixed) discount in currency units.
 *   Bulk discount for product variations supported to treat them as a whole when discounting. 
