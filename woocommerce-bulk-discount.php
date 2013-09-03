@@ -640,7 +640,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 					}).change();
 
 					jQuery('#woocommerce_t4m_discount_type').change(function(){
-			            alert('In current version of Bulk Discount you are safe to change Discount Type on a new site with no orders yet. If there are already some orders, changing this parameter would later show invalid values in order details.');
+			            alert('In current version of Bulk Discount you are safe to change Discount Type for the first time after plugin installation or on a new site with no orders yet. Otherwise, changing this parameter would later show invalid values in order details.');
 					});
 				";
 
