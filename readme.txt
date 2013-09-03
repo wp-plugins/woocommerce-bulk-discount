@@ -37,15 +37,15 @@ The settings for discounts are simple yet extensive, allowing wide range of disc
 policies to be adopted in your store.
 
 Here is the list of main features:
-* Possibility of setting percentage bulk discount or flat (fixed) bulk discount.
-* Possibility of setting a flat (fixed) discount in currency units.
-* Bulk discount for product variations supported to treat them as a whole when discounting. 
-* Discount is better visible and is present on more places (see below).
-* Discount is visible on Checkout page
-* Discount is visible on Order Details page
-* Discount is visible in WooCommerce order e-mails and invoice as well.
-* Showing the applied discount on hovering the item price in the cart.   
-* Possibility of easily changing the styling of price before and after discount.
+*   Possibility of setting percentage bulk discount or flat (fixed) bulk discount.
+*   Possibility of setting a flat (fixed) discount in currency units.
+*   Bulk discount for product variations supported to treat them as a whole when discounting. 
+*   Discount is better visible and is present on more places (see below).
+*   Discount is visible on Checkout page
+*   Discount is visible on Order Details page
+*   Discount is visible in WooCommerce order e-mails and invoice as well.
+*   Showing the applied discount on hovering the item price in the cart.   
+*   Possibility of easily changing the styling of price before and after discount.
 
 == Installation ==
 
