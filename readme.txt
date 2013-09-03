@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,6 +37,7 @@ The settings for discounts are simple yet extensive, allowing wide range of disc
 policies to be adopted in your store.
 
 Here is the list of main features:
+
 *   Possibility of setting percentage bulk discount or flat (fixed) bulk discount.
 *   Possibility of setting a flat (fixed) discount in currency units.
 *   Bulk discount for product variations supported to treat them as a whole when discounting. 
@@ -129,6 +130,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.1 =
+* (3 Sep 2013) Added a warning for changing discount type on a site with existing orders (currently it is safe to change discount type only on fresh WooCommerce installation with no orders).
+
 = 2.0 =
 * (3 Sep 2013) Possibility of setting a flat (fixed) discount in currency units.
 * Discount is better visible and is present on more places (see below).
@@ -166,6 +170,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+Maintenance release.
 
 = 2.0 =
 Major release with new features.
