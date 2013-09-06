@@ -38,8 +38,7 @@ policies to be adopted in your store.
 
 Here is the list of main features:
 
-*   Possibility of setting percentage bulk discount or flat (fixed) bulk discount.
-*   Possibility of setting a flat (fixed) discount in currency units.
+*   Possibility of setting percentage bulk discount or flat (fixed) bulk discount in currency units.
 *   Bulk discount for product variations supported to treat them as a whole when discounting. 
 *   Discount is better visible and is present on more places (see below).
 *   Discount is visible on Checkout page
@@ -131,7 +130,7 @@ Setting bulk discounts couldn't have been easier.
 == Changelog ==
 
 = 2.0.2 =
-* (5 Sep 2013) Important bugfix release. Now the bulk discount metadata are stored to orders as well, making it possible to correctly display discounts for past orders. One can also change the plugin settings any time.
+* (5 Sep 2013) Important maintenance release. Now the bulk discount metadata are stored to orders as well, making it possible to correctly display discounts for past orders. One can also change the plugin settings any time.
 * Added quick link to settings on Wordpress > Plugins page.
 
 = 2.0.1 =
@@ -176,7 +175,7 @@ Setting bulk discounts couldn't have been easier.
 == Upgrade Notice ==
 
 = 2.0.2 =
-Important bugfix release. Update immediately.
+Important maintenance release. Please update immediately.
 
 = 2.0.1 =
 Maintenance release.
