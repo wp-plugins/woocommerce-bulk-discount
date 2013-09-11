@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0.2
+Version: 2.0.3
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -233,6 +233,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             global $woocommerce;
             $_product = get_product($values['product_id']);
             $discount_coeffs = $this->gather_discount_coeffs_from_order($order->id);
+            if (!$discount_coeffs) {
+                return $price;
+            }
             $coeff = $discount_coeffs[$this->get_actual_id($_product)]['coeff'];
             $discount_type = get_post_meta($order->id, '_woocommerce_t4m_discount_type', true);
             if (( $discount_type == 'flat' && $coeff == 0 ) || ($discount_type == '' && $coeff == 1.0 ) ) {
@@ -255,7 +258,11 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
          */
         protected function gather_discount_coeffs_from_order($order_id)
         {
-            $order_discount_coeffs = json_decode(get_post_meta($order_id, '_woocommerce_t4m_discount_coeffs', true), true);
+            $meta = get_post_meta($order_id, '_woocommerce_t4m_discount_coeffs', true);
+            if (!$meta) {
+                return null;
+            }
+            $order_discount_coeffs = json_decode($meta, true);
             return $order_discount_coeffs;
         }
 

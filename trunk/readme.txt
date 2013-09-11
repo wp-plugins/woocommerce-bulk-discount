@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -129,6 +129,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.3 =
+* (11 Sep 2013) Bugfix release.
+
 = 2.0.2 =
 * (5 Sep 2013) Important maintenance release. Now the bulk discount metadata are stored to orders as well, making it possible to correctly display discounts for past orders. One can also change the plugin settings any time.
 * Added quick link to settings on Wordpress > Plugins page.
@@ -173,6 +176,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.3 =
+Bugfix release. Please update immediately.
 
 = 2.0.2 =
 Important maintenance release. Please update immediately.
