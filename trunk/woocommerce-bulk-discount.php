@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0.3
+Version: 2.0.4
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -117,9 +117,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             for ($i = 1; $i <= 5; $i++) {
                 array_push($q, get_post_meta($product_id, "_bulkdiscount_quantity_$i", true));
                 if (get_option('woocommerce_t4m_discount_type', '') == 'flat') {
-                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_flat_$i", true));
+                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_flat_$i", true) ? get_post_meta($product_id, "_bulkdiscount_discount_flat_$i", true) : 0.0);
                 } else {
-                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_$i", true));
+                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_$i", true) ? get_post_meta($product_id, "_bulkdiscount_discount_$i", true) : 0.0);
                 }
                 if ($quantity >= $q[$i] && $q[$i] > $q[0]) {
                     $q[0] = $q[$i];
@@ -127,7 +127,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 }
             }
             // for percentage discount convert the resulting discount from % to the multiplying coefficient
-            return (get_option('woocommerce_t4m_discount_type', '') == 'flat') ? max(0, $d[0]) : min(100, max(0, (100.0 - $d[0]) / 100.0));
+            return (get_option('woocommerce_t4m_discount_type', '') == 'flat') ? max(0, $d[0]) : min(1.0, max(0, (100.0 - $d[0]) / 100.0));
         }
 
         /**
@@ -232,16 +232,19 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         {
             global $woocommerce;
             $_product = get_product($values['product_id']);
+            if ($_product && $_product instanceof WC_Product_Variable && $values['variation_id']) {
+                $actual_id = $values['variation_id'];
+            }
             $discount_coeffs = $this->gather_discount_coeffs_from_order($order->id);
-            if (!$discount_coeffs) {
+            if (empty($discount_coeffs)) {
                 return $price;
             }
-            $coeff = $discount_coeffs[$this->get_actual_id($_product)]['coeff'];
+            $coeff = $discount_coeffs[$actual_id]['coeff'];
             $discount_type = get_post_meta($order->id, '_woocommerce_t4m_discount_type', true);
             if (( $discount_type == 'flat' && $coeff == 0 ) || ($discount_type == '' && $coeff == 1.0 ) ) {
                 return $price; // no price modification
             }
-            $oldprice = woocommerce_price($discount_coeffs[$this->get_actual_id($_product)]['orig_price']);
+            $oldprice = woocommerce_price($discount_coeffs[$actual_id]['orig_price']);
             $old_css = esc_attr(get_option('woocommerce_t4m_css_old_price', 'color: #777; text-decoration: line-through; margin-right: 4px;'));
             $new_css = esc_attr(get_option('woocommerce_t4m_css_new_price', 'color: #4AB915; font-weight: bold;'));
             $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), ($discount_type == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100) . "%")));
