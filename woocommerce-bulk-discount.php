@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0.4
+Version: 2.0.5
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -232,6 +232,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         {
             global $woocommerce;
             $_product = get_product($values['product_id']);
+            $actual_id = $values['product_id'];
             if ($_product && $_product instanceof WC_Product_Variable && $values['variation_id']) {
                 $actual_id = $values['variation_id'];
             }
