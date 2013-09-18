@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,12 @@ Here is the list of main features:
 *   Discount is visible in WooCommerce order e-mails and invoice as well.
 *   Showing the applied discount on hovering the item price in the cart.   
 *   Possibility of easily changing the styling of price before and after discount.
+
+WooCommerce Bulk Discount has been localised to these languages:
+
+*   English
+*   Czech
+*   Portuguese (translated by João)
 
 == Installation ==
 
@@ -129,6 +135,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.6 =
+* (18 Sep 2013) Added Portuguese translation.
+
 = 2.0.5 =
 * (12 Sep 2013) Fixed displaying bug (for different scenario) which has no impact on discount computations.
 
@@ -182,6 +191,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.6 =
+Minor maintenance release.
 
 = 2.0.5 =
 Bugfix release. Please update immediately.
