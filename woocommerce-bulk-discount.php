@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0
+Version: 2.0.6
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -51,6 +51,8 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             add_action('admin_enqueue_scripts', array($this, 'action_enqueue_dependencies_admin'));
             add_action('wp_head', array($this, 'action_enqueue_dependencies'));
 
+            add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'action_links' ) );
+
             add_action('woocommerce_settings_tabs', array($this, 'add_tab'), 10);
 
             // Run these actions when generating the settings tabs.
@@ -79,8 +81,24 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 add_filter('woocommerce_product_write_panels', array($this, 'action_product_write_panels'));
                 add_action('woocommerce_process_product_meta', array($this, 'action_process_meta'));
                 add_filter('woocommerce_cart_product_subtotal', array($this, 'filter_cart_product_subtotal'), 10, 3);
+                add_action('woocommerce_checkout_update_order_meta', array($this, 'order_update_meta'));
             }
 
+        }
+
+        /**
+         * Add action links under WordPress > Plugins
+         *
+         * @param $links
+         * @return array
+         */
+        public function action_links( $links ) {
+
+            $plugin_links = array(
+                '<a href="' . admin_url( 'admin.php?page=woocommerce&tab=bulk_discount' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>',
+            );
+
+            return array_merge( $plugin_links, $links );
         }
 
         /**
@@ -88,6 +106,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
          *
          * @param $product_id
          * @param $quantity
+         * @param $order
          * @return float
          */
         protected function get_discounted_coeff($product_id, $quantity)
@@ -98,9 +117,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             for ($i = 1; $i <= 5; $i++) {
                 array_push($q, get_post_meta($product_id, "_bulkdiscount_quantity_$i", true));
                 if (get_option('woocommerce_t4m_discount_type', '') == 'flat') {
-                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_flat_$i", true));
+                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_flat_$i", true) ? get_post_meta($product_id, "_bulkdiscount_discount_flat_$i", true) : 0.0);
                 } else {
-                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_$i", true));
+                    array_push($d, get_post_meta($product_id, "_bulkdiscount_discount_$i", true) ? get_post_meta($product_id, "_bulkdiscount_discount_$i", true) : 0.0);
                 }
                 if ($quantity >= $q[$i] && $q[$i] > $q[0]) {
                     $q[0] = $q[$i];
@@ -108,7 +127,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 }
             }
             // for percentage discount convert the resulting discount from % to the multiplying coefficient
-            return (get_option('woocommerce_t4m_discount_type', '') == 'flat') ? max(0, $d[0]) : min(100, max(0, (100.0 - $d[0]) / 100.0));
+            return (get_option('woocommerce_t4m_discount_type', '') == 'flat') ? max(0, $d[0]) : min(1.0, max(0, (100.0 - $d[0]) / 100.0));
         }
 
         /**
@@ -213,15 +232,23 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         {
             global $woocommerce;
             $_product = get_product($values['product_id']);
-            $discount_coeffs = $this->gather_discount_coeffs_from_order($order);
-            $coeff = $discount_coeffs[$this->get_actual_id($_product)]['coeff'];
-            if (( get_option('woocommerce_t4m_discount_type', '') == 'flat' && $coeff == 0 ) || (get_option('woocommerce_t4m_discount_type', '') == '' && $coeff == 1.0 ) ) {
+            $actual_id = $values['product_id'];
+            if ($_product && $_product instanceof WC_Product_Variable && $values['variation_id']) {
+                $actual_id = $values['variation_id'];
+            }
+            $discount_coeffs = $this->gather_discount_coeffs_from_order($order->id);
+            if (empty($discount_coeffs)) {
+                return $price;
+            }
+            $coeff = $discount_coeffs[$actual_id]['coeff'];
+            $discount_type = get_post_meta($order->id, '_woocommerce_t4m_discount_type', true);
+            if (( $discount_type == 'flat' && $coeff == 0 ) || ($discount_type == '' && $coeff == 1.0 ) ) {
                 return $price; // no price modification
             }
-            $oldprice = woocommerce_price($discount_coeffs[$this->get_actual_id($_product)]['orig_price']);
+            $oldprice = woocommerce_price($discount_coeffs[$actual_id]['orig_price']);
             $old_css = esc_attr(get_option('woocommerce_t4m_css_old_price', 'color: #777; text-decoration: line-through; margin-right: 4px;'));
             $new_css = esc_attr(get_option('woocommerce_t4m_css_new_price', 'color: #4AB915; font-weight: bold;'));
-            $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), (get_option('woocommerce_t4m_discount_type', '') == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100) . "%")));
+            $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), ($discount_type == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100) . "%")));
             return "<span class='discount-info' title='$bulk_info'>" .
             "<span>$price</span>" .
             "<span class='new-price' style='$new_css'> ($bulk_info)</span></span>";
@@ -230,32 +257,16 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         /**
          * Gather discount information from order.
          *
-         * @param $order
+         * @param $order_id
          * @return array
          */
-        protected function gather_discount_coeffs_from_order($order)
+        protected function gather_discount_coeffs_from_order($order_id)
         {
-            global $woocommerce;
-            $order_discount_coeffs = array();
-            if (sizeof($order->get_items()) > 0) {
-                foreach($order->get_items() as $item) {
-                    $_product = get_product($item['product_id']);
-                    $quantity = 0;
-                    if (get_option('woocommerce_t4m_variations_separate', 'yes') == 'no' && $_product instanceof WC_Product_Variable) {
-                        foreach($order->get_items() as $itemInner) {
-                            $p = get_product($itemInner['product_id']);
-                            if ($p instanceof WC_Product_Variable && $p->id == $_product->id) {
-                                $quantity += $itemInner['qty'];
-                                $order_discount_coeffs[$_product->variation_id]['quantity'] = $quantity;
-                            }
-                        }
-                    } else {
-                        $quantity = $item['qty'];
-                    }
-                    $order_discount_coeffs[$this->get_actual_id($_product)]['coeff'] = $this->get_discounted_coeff($_product->id, $quantity);
-                    $order_coeffs[$this->get_actual_id($_product)]['orig_price'] = $_product->get_price();
-                }
+            $meta = get_post_meta($order_id, '_woocommerce_t4m_discount_coeffs', true);
+            if (!$meta) {
+                return null;
             }
+            $order_discount_coeffs = json_decode($meta, true);
             return $order_discount_coeffs;
         }
 
@@ -335,6 +346,16 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 $newsubtotal = woocommerce_price($_product->get_price() * $quantity * $coeff);
             }
             return $newsubtotal;
+        }
+
+        /**
+         * Store discount info to order as well
+         *
+         * @param $order_id
+         */
+        public function order_update_meta($order_id) {
+            update_post_meta($order_id, "_woocommerce_t4m_discount_type", get_option('woocommerce_t4m_discount_type', ''));
+            update_post_meta($order_id, "_woocommerce_t4m_discount_coeffs", json_encode($this->discount_coeffs));
         }
 
         /**
@@ -470,7 +491,6 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 } else {
                     if (isset($_POST["_bulkdiscount_discount_$i"])) update_post_meta($post_id, "_bulkdiscount_discount_$i", stripslashes($_POST["_bulkdiscount_discount_$i"]));
                 }
-
             }
         }
 
@@ -638,6 +658,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 						}
 
 					}).change();
+
 				";
 
             if (class_exists('WC_Inline_Javascript_Helper')) {
