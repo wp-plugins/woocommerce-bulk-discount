@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -40,7 +40,7 @@ Here is the list of main features:
 
 *   Possibility of setting percentage bulk discount or flat (fixed) bulk discount in currency units.
 *   Bulk discount for product variations supported to treat them as a whole when discounting. 
-*   Discount is better visible and is present on more places (see below).
+*   Discount is better visible and is present on several locations (see below).
 *   Discount is visible on Checkout page
 *   Discount is visible on Order Details page
 *   Discount is visible in WooCommerce order e-mails and invoice as well.
@@ -135,6 +135,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.7 =
+* (29 Sep 2013) Added configuration on which locations should the discount information be visible.
+
 = 2.0.6 =
 * (18 Sep 2013) Added Portuguese translation.
 
@@ -191,6 +194,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.7 =
+Release with new features.
 
 = 2.0.6 =
 Minor maintenance release.
