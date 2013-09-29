@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0.6
+Version: 2.0.7
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -140,6 +140,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         public function filter_item_price($price, $values)
         {
             global $woocommerce;
+            if ((get_option('woocommerce_t4m_show_on_item', 'yes') == 'no')) {
+                return $price;
+            }
             if ((get_option('woocommerce_t4m_discount_type', '') == 'flat')) {
                 return $price;  // for flat discount this filter has no meaning
             }
@@ -172,6 +175,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         public function filter_subtotal_price($price, $values)
         {
             global $woocommerce;
+            if ((get_option('woocommerce_t4m_show_on_subtotal', 'yes') == 'no')) {
+                return $price;
+            }
             $_product = $values['data'];
             if (empty($this->discount_coeffs) || !isset($this->discount_coeffs[$this->get_actual_id($_product)])
                 || !isset($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']) || !isset($this->discount_coeffs[$this->get_actual_id($_product)]['coeff'])
@@ -231,6 +237,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
         public function filter_subtotal_order_price($price, $values, $order)
         {
             global $woocommerce;
+            if ((get_option('woocommerce_t4m_show_on_order_subtotal', 'yes') == 'no')) {
+                return $price;
+            }
             $_product = get_product($values['product_id']);
             $actual_id = $values['product_id'];
             if ($_product && $_product instanceof WC_Product_Variable && $values['variation_id']) {
@@ -610,6 +619,32 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 ),
 
                 array(
+                    'name' => __('Show discount information next to cart item price', 'wc_bulk_discount'),
+                    'id' => 'woocommerce_t4m_show_on_item',
+                    'desc' => __('Applies only to percentage discount.', 'wc_bulk_discount'),
+                    'std' => 'yes',
+                    'type' => 'checkbox',
+                    'default' => 'yes'
+                ),
+
+                array(
+                    'name' => __('Show discount information next to item subtotal price', 'wc_bulk_discount'),
+                    'id' => 'woocommerce_t4m_show_on_subtotal',
+                    'std' => 'yes',
+                    'type' => 'checkbox',
+                    'default' => 'yes'
+                ),
+
+                 array(
+                    'name' => __('Show discount information next to item subtotal price in order history', 'wc_bulk_discount'),
+                    'id' => 'woocommerce_t4m_show_on_order_subtotal',
+                    'desc' => __('Includes showing discount in order e-mails and invoices.', 'wc_bulk_discount'),
+                    'std' => 'yes',
+                    'type' => 'checkbox',
+                    'default' => 'yes'
+                ),
+
+                array(
                     'name' => __('Optionally enter information about discounts visible on cart page.', 'wc_bulk_discount'),
                     'id' => 'woocommerce_t4m_cart_info',
                     'type' => 'textarea',
@@ -647,7 +682,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             $js = "
 					jQuery('#woocommerce_t4m_enable_bulk_discounts').change(function(){
 
-						jQuery('#woocommerce_t4m_cart_info, #woocommerce_t4m_variations_separate, #woocommerce_t4m_discount_type, #woocommerce_t4m_css_old_price, #woocommerce_t4m_css_new_price').closest('tr').hide();
+						jQuery('#woocommerce_t4m_cart_info, #woocommerce_t4m_variations_separate, #woocommerce_t4m_discount_type, #woocommerce_t4m_css_old_price, #woocommerce_t4m_css_new_price, #woocommerce_t4m_show_on_item, #woocommerce_t4m_show_on_subtotal, #woocommerce_t4m_show_on_order_subtotal').closest('tr').hide();
 
 						if ( jQuery(this).attr('checked') ) {
 							jQuery('#woocommerce_t4m_cart_info').closest('tr').show();
@@ -655,6 +690,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 							jQuery('#woocommerce_t4m_discount_type').closest('tr').show();
 							jQuery('#woocommerce_t4m_css_old_price').closest('tr').show();
 							jQuery('#woocommerce_t4m_css_new_price').closest('tr').show();
+							jQuery('#woocommerce_t4m_show_on_item').closest('tr').show();
+							jQuery('#woocommerce_t4m_show_on_subtotal').closest('tr').show();
+							jQuery('#woocommerce_t4m_show_on_order_subtotal').closest('tr').show();
 						}
 
 					}).change();
