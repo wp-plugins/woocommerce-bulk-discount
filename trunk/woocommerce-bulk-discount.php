@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0.7
+Version: 2.0.8
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -127,7 +127,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 }
             }
             // for percentage discount convert the resulting discount from % to the multiplying coefficient
-            return (get_option('woocommerce_t4m_discount_type', '') == 'flat') ? max(0, $d[0]) : min(1.0, max(0, (100.0 - $d[0]) / 100.0));
+            return (get_option('woocommerce_t4m_discount_type', '') == 'flat') ? max(0, $d[0]) : min(1.0, max(0, (100.0 - round($d[0], 2)) / 100.0));
         }
 
         /**
@@ -160,7 +160,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             $oldprice = woocommerce_price($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']);
             $old_css = esc_attr(get_option('woocommerce_t4m_css_old_price', 'color: #777; text-decoration: line-through; margin-right: 4px;'));
             $new_css = esc_attr(get_option('woocommerce_t4m_css_new_price', 'color: #4AB915; font-weight: bold;'));
-            return "<span class='discount-info' title='" . sprintf(__('%d%% bulk discount applied!', 'wc_bulk_discount'), round((1 - $coeff) * 100)) . "'>" .
+            return "<span class='discount-info' title='" . sprintf(__('%s%% bulk discount applied!', 'wc_bulk_discount'), round((1.0 - $coeff) * 100.0, 2)) . "'>" .
                 "<span class='old-price' style='$old_css'>$oldprice</span>" .
                 "<span class='new-price' style='$new_css'>$discprice</span></span>";
         }
@@ -191,7 +191,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             $oldprice = woocommerce_price($this->discount_coeffs[$this->get_actual_id($_product)]['orig_price']);
             $old_css = esc_attr(get_option('woocommerce_t4m_css_old_price', 'color: #777; text-decoration: line-through; margin-right: 4px;'));
             $new_css = esc_attr(get_option('woocommerce_t4m_css_new_price', 'color: #4AB915; font-weight: bold;'));
-            $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), (get_option('woocommerce_t4m_discount_type', '') == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100) . "%")));
+            $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), (get_option('woocommerce_t4m_discount_type', '') == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100, 2) . "%")));
             return "<span class='discount-info' title='$bulk_info'>" .
             "<span>$price</span>" .
             "<span class='new-price' style='$new_css'> ($bulk_info)</span></span>";
@@ -257,7 +257,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
             $oldprice = woocommerce_price($discount_coeffs[$actual_id]['orig_price']);
             $old_css = esc_attr(get_option('woocommerce_t4m_css_old_price', 'color: #777; text-decoration: line-through; margin-right: 4px;'));
             $new_css = esc_attr(get_option('woocommerce_t4m_css_new_price', 'color: #4AB915; font-weight: bold;'));
-            $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), ($discount_type == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100) . "%")));
+            $bulk_info = sprintf(__('Incl. %s discount', 'wc_bulk_discount'), ($discount_type == 'flat' ? get_woocommerce_currency_symbol() . $coeff : (round((1 - $coeff) * 100, 2) . "%")));
             return "<span class='discount-info' title='$bulk_info'>" .
             "<span>$price</span>" .
             "<span class='new-price' style='$new_css'> ($bulk_info)</span></span>";
@@ -670,7 +670,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
                 array('type' => 'sectionend', 'id' => 't4m_bulk_discounts_options'),
 
                 array(
-                    'name' => 'If you find WooCommerce Bulk Discount useful, please rate the plugin at wordpress.org or kindly consider small donation to support further development.',
+                    'desc' => '<b>If you find WooCommerce Bulk Discount useful, please rate the plugin at <a href="http://wordpress.org/plugins/woocommerce-bulk-discount/">http://wordpress.org/plugins/woocommerce-bulk-discount/</a> or kindly consider small donation to support further development.</b>',
                     'id' => 'woocommerce_t4m_begging_text',
                     'type' => 'title'
                 ),
