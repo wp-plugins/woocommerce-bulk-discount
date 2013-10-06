@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -135,6 +135,10 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.8 =
+* (6 Oct 2013) Refined discount precision for percentage discounts with decimal point (no impact on integer discounts).
+* Translations updated.
+
 = 2.0.7 =
 * (29 Sep 2013) Added configuration on which locations should the discount information be visible.
 
@@ -194,6 +198,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.8 =
+Maintenance release.
 
 = 2.0.7 =
 Release with new features.
