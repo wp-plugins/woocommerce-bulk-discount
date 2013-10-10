@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.tools4me.net/wordpress/woocommerce-bulk-discount-plugin
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.0.9
+Version: 2.0.10
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -136,6 +136,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 		 */
 		public function filter_item_price($price, $values) {
 			global $woocommerce;
+			if (!$values || @!$values['data']) {
+				return $price;
+			}
 			if ((get_option('woocommerce_t4m_show_on_item', 'yes') == 'no')) {
 				return $price;
 			}
@@ -170,6 +173,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 		 */
 		public function filter_subtotal_price($price, $values) {
 			global $woocommerce;
+			if (!$values || !$values['data']) {
+				return $price;
+			}
 			if ((get_option('woocommerce_t4m_show_on_subtotal', 'yes') == 'no')) {
 				return $price;
 			}
@@ -230,6 +236,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 		 */
 		public function filter_subtotal_order_price($price, $values, $order) {
 			global $woocommerce;
+			if (!$values || !$order) {
+				return $price;
+			}
 			if ((get_option('woocommerce_t4m_show_on_order_subtotal', 'yes') == 'no')) {
 				return $price;
 			}
@@ -335,6 +344,9 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
 		 * @return string
 		 */
 		public function filter_cart_product_subtotal($subtotal, $_product, $quantity) {
+			if (!$_product || !$quantity) {
+				return $subtotal;
+			}
 			$coeff = $this->discount_coeffs[$this->get_actual_id($_product)]['coeff'];
 			if ((get_option('woocommerce_t4m_discount_type', '') == 'flat')) {
 				$newsubtotal = woocommerce_price(max(0, ($_product->get_price() * $quantity) - $coeff));
