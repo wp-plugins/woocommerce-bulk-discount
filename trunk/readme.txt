@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6
-Stable tag: 2.0.9
+Stable tag: 2.0.10
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -135,6 +135,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.10 =
+* (10 Oct 2013) Fixing a bug which might have resulted in collision with few other WooCommerce plugins.
+
 = 2.0.9 =
 * (9 Oct 2013) Translations updated.
 * Minor code formatting changes.
@@ -202,6 +205,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.10 =
+Bugfix release.
 
 = 2.0.9 =
 Maintenance release.
