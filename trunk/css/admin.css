@@ -5,3 +5,11 @@
 #bulkdiscount_product_data textarea {
     width: 60% !important;
 }
+
+#bulkdiscount_product_data .even {
+	background-color: rgba(0,0,0,0.1);
+}
+
+#bulkdiscount_product_data .odd {
+	background-color: rgba(0,0,0,0.0);
+}
