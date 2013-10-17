@@ -400,13 +400,13 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 					e.find('.options_group<?php echo max($i, 2); ?>').hide();
 					e.find('#add_discount_line<?php echo max($i, 2); ?>').hide();
 					e.find('#add_discount_line<?php echo $i; ?>').click(function () {
-						if (e.find('#_bulkdiscount_quantity_<?php echo max($i-1, 1); ?>').val() != '' &&
+						if (<?php echo $i; ?> == 1 || ( e.find('#_bulkdiscount_quantity_<?php echo max($i-1, 1); ?>').val() != '' &&
 							<?php if ( get_option( 'woocommerce_t4m_discount_type', '' ) == 'flat' ) : ?>
 							e.find('#_bulkdiscount_discount_flat_<?php echo max($i-1, 1); ?>').val() != ''
 							<?php else: ?>
 							e.find('#_bulkdiscount_discount_<?php echo max($i-1, 1); ?>').val() != ''
 						<?php endif; ?>
-						)
+						) )
 						{
 							e.find('.block<?php echo $i; ?>').show(400);
 							e.find('.options_group<?php echo min($i+1, 6); ?>').show(400);
@@ -420,21 +420,21 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 							alert('<?php _e( 'Please fill in the current line before adding new line.', 'wc_bulk_discount' ); ?>');
 						}
 					});
-					e.find('#delete_discount_line<?php echo max($i, 2); ?>').hide();
+					e.find('#delete_discount_line<?php echo max($i, 1); ?>').hide();
 					e.find('#delete_discount_line<?php echo $i; ?>').click(function () {
-						e.find('.block<?php echo max($i-1, 2); ?>').hide(400);
+						e.find('.block<?php echo max($i-1, 1); ?>').hide(400);
 						e.find('.options_group<?php echo min($i, 6); ?>').hide(400);
 						e.find('#add_discount_line<?php echo min($i, 5); ?>').hide(400);
-						e.find('#add_discount_line<?php echo max($i-1, 2); ?>').show(400);
+						e.find('#add_discount_line<?php echo max($i-1, 1); ?>').show(400);
 						e.find('#delete_discount_line<?php echo min($i, 6); ?>').hide(400);
-						e.find('#delete_discount_line<?php echo max($i-1, 3); ?>').show(400);
-						e.find('#_bulkdiscount_quantity_<?php echo max($i-1, 2); ?>').val('');
+						e.find('#delete_discount_line<?php echo max($i-1, 2); ?>').show(400);
+						e.find('#_bulkdiscount_quantity_<?php echo max($i-1, 1); ?>').val('');
 						<?php
 							if ( get_option( 'woocommerce_t4m_discount_type', '' ) == 'flat' ) :
 						?>
-						e.find('#_bulkdiscount_discount_flat_<?php echo max($i-1, 2); ?>').val('');
+						e.find('#_bulkdiscount_discount_flat_<?php echo max($i-1, 1); ?>').val('');
 						<?php else: ?>
-						e.find('#_bulkdiscount_discount_<?php echo max($i-1, 2); ?>').val('');
+						e.find('#_bulkdiscount_discount_<?php echo max($i-1, 1); ?>').val('');
 						<?php endif; ?>
 					});
 					<?php
@@ -449,16 +449,16 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 					e.find('#delete_discount_line<?php echo $i; ?>').hide();
 					e.find('.options_group<?php echo min($i+1,6); ?>').show();
 					e.find('#add_discount_line<?php echo min($i+1,6); ?>').show();
-					e.find('#delete_discount_line<?php echo min($i+2,6); ?>').show();
+					e.find('#delete_discount_line<?php echo min($i+1,6); ?>').show();
 					<?php
 					$cnt++;
 				}
 			}
 			if ($cnt >= 6) {
-				?>e.find('#add_discount_line<?php echo min($i+1,6); ?>').show();
+				?>e.find('#add_discount_line6').show();
 					<?php
-								}
-								?>
+			}
+			?>
 				});
 			</script>
 
