@@ -3,8 +3,8 @@ Contributors: Rene Puchinger
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6VEQ8XXK6B3UE
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
-Tested up to: 3.6
-Stable tag: 2.0.11
+Tested up to: 3.6.1
+Stable tag: 2.0.12
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,8 +50,10 @@ Here is the list of main features:
 WooCommerce Bulk Discount has been localised to these languages:
 
 *   English
-*   Czech
+*   Swedish (translated by Mr3K)
 *   Portuguese (translated by João)
+*   Czech
+
 
 == Installation ==
 
@@ -135,6 +137,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.0.12 =
+* (23 Oct 2013) Added Swedish translation.
+
 = 2.0.11 =
 * (16 Oct 2013) Redesigning input of discounts on Bulk Discount tab to be more user friendly.
 * Minor code formatting changes.
@@ -209,6 +214,9 @@ Setting bulk discounts couldn't have been easier.
 * Stable version.
 
 == Upgrade Notice ==
+
+= 2.0.12 =
+Language translation release.
 
 = 2.0.11 =
 More friendly UI.
