@@ -15,7 +15,7 @@ Apply fine-grained bulk discounts to items in the shopping cart with this WooCom
 WooCommerce Bulk Discount makes it possible to apply fine-grained bulk discounts to items in the shopping cart,
 depending on the ordered quantity and on the specific product.
 
-WooCommerce version 2.0+ required.
+WooCommerce version 2.0+ required. Last tested with WooCommerce 2.0.18.
 
 Let us examine some examples of usage.
 
