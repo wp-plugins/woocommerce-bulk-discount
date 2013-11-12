@@ -4,11 +4,11 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6.1
-Stable tag: 2.0.12
+Stable tag: 2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Apply fine-grained bulk discounts to items in the shopping cart with this WooCommerce extension. Enjoy version 2.0 with many new features!
+Apply fine-grained bulk discounts to items in the shopping cart with this WooCommerce extension. Enjoy version 2.1 with new features!
 
 == Description ==
 
@@ -38,13 +38,16 @@ policies to be adopted in your store.
 Here is the list of the main features:
 
 *   Possibility of setting percentage bulk discount or flat (fixed) bulk discount in currency units.
-*   Bulk discounts for product variations is supported to treat them separately or as a whole when discounting. 
+*   Bulk discounts for product variations is supported to treat them separately or as one product when discounting. **Updated in 2.1**
 *   Discount is better visible and is available on several locations (see below).
 *   Discount is visible on the Checkout page
 *   Discount is visible on the Order Details page
 *   Discount is visible in WooCommerce order e-mails and invoices as well.
 *   Showing the applied discount when hovering over the item price in the cart.   
 *   Possibility of easily changing the CSS of the price before and after discount.
+*   Bulk discount is not applied if coupon code is used. **New in 2.1**
+*   HTML markup is allowed in information about the bulk discount offer in Product Description. **New in 2.1**
+*   Bulk Discount can be disabled more easily in the Product Options page. **New in 2.1**
 
 WooCommerce Bulk Discount has been localised to these languages:
 
@@ -135,6 +138,13 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.1 =
+* (12 Nov 2013) Bulk discount is not applied if coupon code is used.
+* HTML markup is allowed in information about the bulk discount offer in Product Description.
+* Bulk Discount can be disabled more easily in the Product Options page.
+* There are further settings for applying bulk discount to product variations.
+
+
 = 2.0.12 =
 * (23 Oct 2013) Added Swedish translation.
 
@@ -212,6 +222,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.1 =
+Release with new features.
 
 = 2.0.12 =
 Language translation release.
