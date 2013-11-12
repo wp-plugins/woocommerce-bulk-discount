@@ -160,13 +160,13 @@ Setting bulk discounts couldn't have been easier.
 * (18 Sep 2013) Added Portuguese translation.
 
 = 2.0.5 =
-* (12 Sep 2013) Fixed displaying bug (for different scenario) which has no impact on discount calculations.
+* (12 Sep 2013) Fixed a bug of incorrect discount displayed (no impact on discount computations).
 
 = 2.0.4 =
-* (11 Sep 2013) Fixed displaying bug (for different scenario) which has no impact on discount calculations.
+* (11 Sep 2013) *unstable*
 
 = 2.0.3 =
-* (11 Sep 2013) Fixed displaying bug which has no impact on discount computations.
+* (11 Sep 2013) *unstable*
 
 = 2.0.2 =
 * (5 Sep 2013) Important maintenance release. Now the bulk discount metadata are stored to orders as well, making it possible to correctly display discounts for past orders. You can also change the plugin settings any time.
@@ -206,10 +206,10 @@ Setting bulk discounts couldn't have been easier.
 * cleaned up some code.
 
 = 1.0.1 =
-* (5 Jul 2013) cleaned up some code.
+* (5 Jul 2013) *unstable*
 
 = 1.0 =
-* Stable version.
+* *unstable*
 
 == Upgrade Notice ==
 
@@ -238,10 +238,10 @@ Minor maintenance release.
 Bugfix release. Please update immediately.
 
 = 2.0.4 =
-Bugfix release. Please update immediately.
+*unstable*
 
 = 2.0.3 =
-Bugfix release. Please update immediately.
+*unstable*
 
 = 2.0.2 =
 Important maintenance release. Please update immediately.
@@ -268,7 +268,7 @@ Maintenance release.
 Important bugfix release. Upgrading recommended as soon as possible.
 
 = 1.0.1 =
-This version has a minor change in code without any noticeable impact.
+*unstable*
 
 = 1.0 =
-N/A.
+*unstable*
