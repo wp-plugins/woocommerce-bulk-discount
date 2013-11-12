@@ -75,12 +75,18 @@ modify the CSS styles for the old value and the new value which is displayed in 
 Save the settings.
 
 2. Navigate to Products and choose a product for which you want to create a discount policy.
-In the Product Data panel, click Bulk Dicounts and optionally fill information about the discount
+In the Product Data panel, click Bulk Discount and optionally fill information about the discount
 which will be visible in the product description.
 
 3. Click "Add discount line" button to create a policy. Quantity (min.) means minimal
 number of ordered items so that the (second textbox) Discount applies. It is possible to
 add up to five discount lines to fine-tune the discount setting.
+
+**Notice about upgrading to Bulk Discount version 2.1**
+
+Due to a new feature of more explicit activation of bulk discounts to products, you need
+to manually click "Bulk Discount enabled" on all product setting pages under the Bulk Discount tab
+(for products which have bulk discount data already set).
 
 == Frequently Asked Questions ==
 
