@@ -209,7 +209,7 @@ Setting bulk discounts couldn't have been easier.
 * (5 Jul 2013) *unstable*
 
 = 1.0 =
-* *unstable*
+* Initial version.
 
 == Upgrade Notice ==
 
@@ -271,4 +271,4 @@ Important bugfix release. Upgrading recommended as soon as possible.
 *unstable*
 
 = 1.0 =
-*unstable*
+Initial version.
