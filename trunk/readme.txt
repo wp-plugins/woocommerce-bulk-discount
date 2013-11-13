@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6.1
-Stable tag: 2.1
+Stable tag: 2.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,7 +38,7 @@ policies to be adopted in your store.
 Here is the list of the main features:
 
 *   Possibility of setting percentage bulk discount or flat (fixed) bulk discount in currency units.
-*   Bulk discounts for product variations is supported to treat them separately or as one product when discounting. **Updated in 2.1**
+*   Bulk discounts for product variations is supported to treat them separately or by shared quantity when discounting. 
 *   Discount is better visible and is available on several locations (see below).
 *   Discount is visible on the Checkout page
 *   Discount is visible on the Order Details page
@@ -81,12 +81,6 @@ which will be visible in the product description.
 3. Click "Add discount line" button to create a policy. Quantity (min.) means minimal
 number of ordered items so that the (second textbox) Discount applies. It is possible to
 add up to five discount lines to fine-tune the discount setting.
-
-**Notice about upgrading to Bulk Discount version 2.1**
-
-Due to a new feature of more explicit activation of bulk discounts to products, you need
-to manually click "Bulk Discount enabled" on all product setting pages under the Bulk Discount tab
-(for products which have bulk discount data already set).
 
 == Frequently Asked Questions ==
 
@@ -144,12 +138,14 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.1.1 =
+* (13 Nov 2013) Feature of product variations reverted to 2.0 version state.
+
 = 2.1 =
 * (12 Nov 2013) Bulk discount is not applied if coupon code is used.
 * HTML markup is allowed in information about the bulk discount offer in Product Description.
 * Bulk Discount can be disabled more easily in the Product Options page.
 * There are further settings for applying bulk discount to product variations.
-
 
 = 2.0.12 =
 * (23 Oct 2013) Added Swedish translation.
@@ -228,6 +224,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.1.1 =
+Maintenance release.
 
 = 2.1 =
 Release with new features.
