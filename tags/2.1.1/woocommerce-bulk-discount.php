@@ -756,7 +756,15 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 					'default' => 'color: #4AB915; font-weight: bold;'
 				),
 
-				array( 'type' => 'sectionend', 'id' => 't4m_bulk_discounts_options' )
+				array( 'type' => 'sectionend', 'id' => 't4m_bulk_discounts_options' ),
+				
+				array(
+					'desc' => 'If you find the WooCommerce Bulk Discount extension useful, please rate it <a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/woocommerce-bulk-discount#postform">&#9733;&#9733;&#9733;&#9733;&#9733;</a>. You can also contact us if you want a custom tailored WooCommerce extension.',
+					'id' => 'woocommerce_t4m_bulk_discount_notice_text',
+					'type' => 'title'
+				),
+				
+				array( 'type' => 'sectionend', 'id' => 'woocommerce_t4m_bulk_discount_notice_text' )
 
 			) ); // End settings
 
