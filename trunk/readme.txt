@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6.1
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -138,6 +138,10 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.1.2 =
+* (15 Nov 2013) Localisation updated (Portuguese, Czech).
+* CSS admin tab alignment correction.
+
 = 2.1.1 =
 * (13 Nov 2013) Feature of product variations reverted to 2.0 version state.
 
@@ -224,6 +228,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.1.2 =
+Maintenance release.
 
 = 2.1.1 =
 Maintenance release.
