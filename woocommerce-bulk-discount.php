@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.renepuchinger.com
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.1.2
+Version: 2.1.3
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -504,7 +504,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 
 				<div class="options_group">
 					<?php
-					woocommerce_wp_checkbox( array( 'id' => '_bulkdiscount_enabled', 'value' => get_option('_bulkdiscount_enabled') ? get_option('_bulkdiscount_enabled') : 'yes', 'label' => __( 'Bulk Discount enabled', 'wc_bulk_discount' ) ) );
+					woocommerce_wp_checkbox( array( 'id' => '_bulkdiscount_enabled', 'value' => get_post_meta($thepostid, '_bulkdiscount_enabled', true) ? get_post_meta($thepostid, '_bulkdiscount_enabled', true) : 'yes', 'label' => __( 'Bulk Discount enabled', 'wc_bulk_discount' ) ) );
 					woocommerce_wp_textarea_input( array( 'id' => "_bulkdiscount_text_info", 'label' => __( 'Bulk discount special offer text in product description', 'wc_bulk_discount' ), 'description' => __( 'Optionally enter bulk discount information that will be visible on the product page.', 'wc_bulk_discount' ), 'desc_tip' => 'yes', 'class' => 'fullWidth' ) );
 					?>
 				</div>
