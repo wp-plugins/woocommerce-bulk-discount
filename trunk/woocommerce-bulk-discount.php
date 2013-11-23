@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.renepuchinger.com
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.1.3
+Version: 2.1.4
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -141,7 +141,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				return $price;
 			}
 			$_product = $values['data'];
-			if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != 'yes' ) {
+			if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
 				return $price;
 			}
 			if ( ( get_option( 'woocommerce_t4m_show_on_item', 'yes' ) == 'no' ) ) {
@@ -183,7 +183,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				return $price;
 			}
 			$_product = $values['data'];
-			if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != 'yes' ) {
+			if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
 				return $price;
 			}
 			if ( ( get_option( 'woocommerce_t4m_show_on_subtotal', 'yes' ) == 'no' ) ) {
@@ -249,7 +249,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				return $price;
 			}
 			$_product = get_product( $values['product_id'] );
-			if ( get_post_meta( $values['product_id'], "_bulkdiscount_enabled", true ) != 'yes' ) {
+			if ( get_post_meta( $values['product_id'], "_bulkdiscount_enabled", true ) != '' && get_post_meta( $values['product_id'], "_bulkdiscount_enabled", true ) !== 'yes' ) {
 				return $price;
 			}
 			if ( ( get_option( 'woocommerce_t4m_show_on_order_subtotal', 'yes' ) == 'no' ) ) {
@@ -263,7 +263,10 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 			if ( empty( $discount_coeffs ) ) {
 				return $price;
 			}
-			$coeff = $discount_coeffs[$actual_id]['coeff'];
+			@$coeff = $discount_coeffs[$actual_id]['coeff'];
+			if ( !$coeff ) {
+				return $price;
+			}
 			$discount_type = get_post_meta( $order->id, '_woocommerce_t4m_discount_type', true );
 			if ( ( $discount_type == 'flat' && $coeff == 0 ) || ( $discount_type == '' && $coeff == 1.0 ) ) {
 				return $price; // no price modification
@@ -306,7 +309,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 			if ( sizeof( $cart->cart_contents ) > 0 ) {
 				foreach ( $cart->cart_contents as $cart_item_key => $values ) {
 					$_product = $values['data'];
-					if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != 'yes' ) {
+					if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
 						continue;
 					}
 					if ( ( get_option( 'woocommerce_t4m_discount_type', '' ) == 'flat' ) ) {
@@ -346,7 +349,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 			if ( sizeof( $cart->cart_contents ) > 0 ) {
 				foreach ( $cart->cart_contents as $cart_item_key => $values ) {
 					$_product = $values['data'];
-					if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != 'yes' ) {
+					if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
 						continue;
 					}
 					$values['data']->set_price( $this->discount_coeffs[$this->get_actual_id( $_product )]['orig_price'] );
@@ -381,7 +384,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 			if ( $this->is_coupon_applied() ) {
 				return $subtotal;
 			}
-			if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != 'yes' ) {
+			if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
 				return $subtotal;
 			}
 			$coeff = $this->discount_coeffs[$this->get_actual_id( $_product )]['coeff'];
@@ -504,7 +507,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 
 				<div class="options_group">
 					<?php
-					woocommerce_wp_checkbox( array( 'id' => '_bulkdiscount_enabled', 'value' => get_post_meta($thepostid, '_bulkdiscount_enabled', true) ? get_post_meta($thepostid, '_bulkdiscount_enabled', true) : 'yes', 'label' => __( 'Bulk Discount enabled', 'wc_bulk_discount' ) ) );
+					woocommerce_wp_checkbox( array( 'id' => '_bulkdiscount_enabled', 'value' => get_post_meta( $thepostid, '_bulkdiscount_enabled', true ) ? get_post_meta( $thepostid, '_bulkdiscount_enabled', true ) : 'yes', 'label' => __( 'Bulk Discount enabled', 'wc_bulk_discount' ) ) );
 					woocommerce_wp_textarea_input( array( 'id' => "_bulkdiscount_text_info", 'label' => __( 'Bulk discount special offer text in product description', 'wc_bulk_discount' ), 'description' => __( 'Optionally enter bulk discount information that will be visible on the product page.', 'wc_bulk_discount' ), 'desc_tip' => 'yes', 'class' => 'fullWidth' ) );
 					?>
 				</div>
@@ -757,13 +760,13 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				),
 
 				array( 'type' => 'sectionend', 'id' => 't4m_bulk_discounts_options' ),
-				
+
 				array(
 					'desc' => 'If you find the WooCommerce Bulk Discount extension useful, please rate it <a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/woocommerce-bulk-discount#postform">&#9733;&#9733;&#9733;&#9733;&#9733;</a>. You can also contact us if you want a custom tailored WooCommerce extension.',
 					'id' => 'woocommerce_t4m_bulk_discount_notice_text',
 					'type' => 'title'
 				),
-				
+
 				array( 'type' => 'sectionend', 'id' => 'woocommerce_t4m_bulk_discount_notice_text' )
 
 			) ); // End settings

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.6.1
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -138,6 +138,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.1.4 =
+* (23 Nov 2013) Corrected an issue of forcing Bulk Discount disabled on products after updating from previous versions of Bulk Discount.
+
 = 2.1.3 =
 * (18 Nov 2013) Corrected a bug of being not able to disable Bulk Discount on products.
 
@@ -231,6 +234,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.1.4 =
+Bugfix release. Please update immediately.
 
 = 2.1.3 =
 Bugfix release. Please update immediately.
