@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,7 +45,7 @@ Here is the list of the main features:
 *   Discount is visible in WooCommerce order e-mails and invoices as well.
 *   Showing the applied discount when hovering over the item price in the cart.   
 *   Possibility of easily changing the CSS of the price before and after discount.
-*   Bulk discount is not applied if coupon code is used. **New in 2.1**
+*   Bulk discount can or cannot be applied if a coupon code is used, depending on configuration. **Updated in 2.1.5**
 *   HTML markup is allowed in information about the bulk discount offer in Product Description. **New in 2.1**
 *   Bulk Discount can be disabled more easily in the Product Options page. **New in 2.1**
 
@@ -137,6 +137,10 @@ Setting bulk discounts couldn't have been easier.
 6. Example of percentage bulk discount visibility on the cart page.
 
 == Changelog ==
+
+= 2.1.5 =
+* (7 Dec 2013) It is now possible to disable the feature of removing bulk discounts when a coupon code is applied.
+* Minor code cleanup and optimization.
 
 = 2.1.4 =
 * (23 Nov 2013) Corrected an issue of forcing Bulk Discount disabled on products after updating from previous versions of Bulk Discount.
@@ -234,6 +238,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.1.5 =
+Maintenance release.
 
 = 2.1.4 =
 Bugfix release. Please update immediately.
