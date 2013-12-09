@@ -56,6 +56,10 @@ WooCommerce Bulk Discount has been localised to these languages:
 *   Portuguese (translated by João)
 *   Czech
 
+**Check out these premium plugins:**
+*   <a href="http://codecanyon.net/item/woocommerce-free-gift/6144902">WooCommerce Free Gift</a>
+*   <a href="http://codecanyon.net/item/woocommerce-minute-discounts-on-crosssells/6337331">WooCommerce Minute Discounts on Cross-sells</a>
+*   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561">WooCommerce Gift Coupons</a>
 
 == Installation ==
 
