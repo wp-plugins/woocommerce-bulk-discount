@@ -58,9 +58,10 @@ WooCommerce Bulk Discount has been localised to these languages:
 
 **Check out these premium WooCommerce extensions:**
 
-*   <a href="http://codecanyon.net/item/woocommerce-free-gift/6144902">WooCommerce Free Gift</a>
-*   <a href="http://codecanyon.net/item/woocommerce-minute-discounts-on-crosssells/6337331">WooCommerce Minute Discounts on Cross-sells</a>
-*   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561">WooCommerce Gift Coupons</a>
+*   <a href="http://codecanyon.net/item/woocommerce-free-gift/6144902?ref=renp">WooCommerce Free Gift</a>
+*   <a href="http://codecanyon.net/item/woocommerce-minute-discounts-on-crosssells/6337331?ref=renp">WooCommerce Minute Discounts on Cross-sells</a>
+*   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561?ref=renp">WooCommerce Gift Coupons</a>
+*   <a href="http://codecanyon.net/item/woocommerce-add-custom-quantity-to-cart/6360685?ref=renp">WooCommerce Add Custom Quantity to Cart</a>
 
 == Installation ==
 
