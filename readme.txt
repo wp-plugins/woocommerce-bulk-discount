@@ -3,12 +3,12 @@ Contributors: Rene Puchinger
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6VEQ8XXK6B3UE
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
-Tested up to: 3.8
+Tested up to: 3.8.1
 Stable tag: 2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Apply fine-grained bulk discounts to items in the shopping cart with this WooCommerce extension. Enjoy version 2.1 with new features!
+Apply fine-grained bulk discounts to items in the shopping cart with this WooCommerce extension. Now compatible with WooCommerce 2.1!
 
 == Description ==
 
