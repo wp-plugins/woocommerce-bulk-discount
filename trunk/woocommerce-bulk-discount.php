@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://www.renepuchinger.com
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.1.5
+Version: 2.2
 Author URI: http://www.renepuchinger.com
 License: GPL3
 
@@ -34,6 +34,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 	class Woo_Bulk_Discount_Plugin_t4m {
 
 		var $discount_coeffs;
+		var $bulk_discount_calculated = false;
 
 		public function __construct() {
 
@@ -71,11 +72,11 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 		public function woocommerce_loaded() {
 
 			if ( get_option( 'woocommerce_t4m_enable_bulk_discounts', 'yes' ) == 'yes' ) {
+
 				add_action( 'woocommerce_before_calculate_totals', array( $this, 'action_before_calculate' ), 10, 1 );
 				add_action( 'woocommerce_calculate_totals', array( $this, 'action_after_calculate' ), 10, 1 );
 				add_action( 'woocommerce_before_cart_table', array( $this, 'before_cart_table' ) );
 				add_action( 'woocommerce_single_product_summary', array( $this, 'single_product_summary' ), 45 );
-				add_filter( 'woocommerce_cart_item_price_html', array( $this, 'filter_item_price' ), 10, 2 );
 				add_filter( 'woocommerce_cart_item_subtotal', array( $this, 'filter_subtotal_price' ), 10, 2 );
 				add_filter( 'woocommerce_checkout_item_subtotal', array( $this, 'filter_subtotal_price' ), 10, 2 );
 				add_filter( 'woocommerce_order_formatted_line_subtotal', array( $this, 'filter_subtotal_order_price' ), 10, 3 );
@@ -84,6 +85,14 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				add_action( 'woocommerce_process_product_meta', array( $this, 'action_process_meta' ) );
 				add_filter( 'woocommerce_cart_product_subtotal', array( $this, 'filter_cart_product_subtotal' ), 10, 3 );
 				add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'order_update_meta' ) );
+
+				if ( version_compare( WOOCOMMERCE_VERSION, "2.1.0" ) >= 0 ) {
+					add_filter( 'woocommerce_cart_item_price', array( $this, 'filter_item_price' ), 10, 2 );
+					add_filter( 'woocommerce_update_cart_validation', array( $this, 'filter_before_calculate' ), 10, 1 );
+				} else {
+					add_filter( 'woocommerce_cart_item_price_html', array( $this, 'filter_item_price' ), 10, 2 );
+				}
+
 			}
 
 		}
@@ -330,9 +339,14 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				return;
 			}
 
+			if ($this->bulk_discount_calculated) {
+				return;
+			}
+
 			$this->gather_discount_coeffs();
 
 			if ( sizeof( $cart->cart_contents ) > 0 ) {
+
 				foreach ( $cart->cart_contents as $cart_item_key => $values ) {
 					$_product = $values['data'];
 					if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
@@ -346,7 +360,50 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 
 					$values['data']->set_price( $row_base_price );
 				}
+
+				$this->bulk_discount_calculated = true;
+
 			}
+
+		}
+
+		public function filter_before_calculate( $res ) {
+
+			global $woocommerce;
+
+			if ($this->bulk_discount_calculated) {
+				return $res;
+			}
+
+			$cart = $woocommerce->cart;
+
+			if ( $this->coupon_check() ) {
+				return $res;
+			}
+
+			$this->gather_discount_coeffs();
+
+			if ( sizeof( $cart->cart_contents ) > 0 ) {
+
+				foreach ( $cart->cart_contents as $cart_item_key => $values ) {
+					$_product = $values['data'];
+					if ( get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) != '' && get_post_meta( $_product->id, "_bulkdiscount_enabled", true ) !== 'yes' ) {
+						continue;
+					}
+					if ( ( get_option( 'woocommerce_t4m_discount_type', '' ) == 'flat' ) ) {
+						$row_base_price = max( 0, $_product->get_price() - ( $this->discount_coeffs[$this->get_actual_id( $_product )]['coeff'] / $values['quantity'] ) );
+					} else {
+						$row_base_price = $_product->get_price() * $this->discount_coeffs[$this->get_actual_id( $_product )]['coeff'];
+					}
+
+					$values['data']->set_price( $row_base_price );
+				}
+
+				$this->bulk_discount_calculated = true;
+
+			}
+
+			return $res;
 
 		}
 
@@ -462,14 +519,24 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 		 * Add entry to Product Settings.
 		 */
 		public function action_product_write_panel_tabs() {
-			echo '<li class="bulkdiscount_tab bulkdiscount_options"><a href="#bulkdiscount_product_data">' . __( 'Bulk Discount', 'wc_bulk_discount' ) . '</a></li>';
+
+			$style = '';
+
+			if ( version_compare( WOOCOMMERCE_VERSION, "2.1.0" ) >= 0 ) {
+				$style = 'style = "padding: 10px !important"';
+			}
+
+			echo '<li class="bulkdiscount_tab bulkdiscount_options"><a href="#bulkdiscount_product_data" '.$style.'>' . __( 'Bulk Discount', 'wc_bulk_discount' ) . '</a></li>';
+
 		}
 
 		/**
 		 * Add entry content to Product Settings.
 		 */
 		public function action_product_write_panels() {
+
 			global $thepostid, $post;
+
 			if ( !$thepostid ) $thepostid = $post->ID;
 			?>
 			<script type="text/javascript">
