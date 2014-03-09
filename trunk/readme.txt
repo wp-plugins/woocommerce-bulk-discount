@@ -143,6 +143,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.2 =
+* (22 Feb 2013) WooCommerce 2.1 compatibility issues resolved.
+
 = 2.1.5 =
 * (7 Dec 2013) It is now possible to disable the feature of removing bulk discounts when a coupon code is applied.
 * Minor code cleanup and optimization.
@@ -243,6 +246,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.2 =
+Maintenance release.
 
 = 2.1.5 =
 Maintenance release.
