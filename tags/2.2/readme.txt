@@ -63,6 +63,7 @@ WooCommerce Bulk Discount has been localised to these languages:
 *   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561?ref=renp">WooCommerce Gift Coupons</a>
 *   <a href="http://codecanyon.net/item/woocommerce-add-custom-quantity-to-cart/6360685?ref=renp">WooCommerce Add Custom Quantity to Cart</a>
 *   <a href="http://codecanyon.net/item/woocommerce-minute-discounts-on-crosssells/6337331?ref=renp">WooCommerce Minute Discounts on Cross-sells</a>
+*   <a href="http://codecanyon.net/item/woocommerce-better-stock-overview/8376601?ref=renp">WooCommerce Better Stock Overview</a>
 
 == Installation ==
 
