@@ -4,11 +4,11 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 3.9
-Stable tag: 2.2
+Stable tag: 2.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Apply fine-grained bulk discounts to items in the shopping cart with this WooCommerce extension. Now compatible with WooCommerce 2.1!
+Apply fine-grained bulk discounts to items in the shopping cart with this WooCommerce extension.
 
 == Description ==
 
@@ -45,25 +45,27 @@ Here is the list of the main features:
 *   Discount is visible in WooCommerce order e-mails and invoices as well.
 *   Showing the applied discount when hovering over the item price in the cart.   
 *   Possibility of easily changing the CSS of the price before and after discount.
-*   Bulk discount can or cannot be applied if a coupon code is used, depending on configuration. **Updated in 2.1.5**
-*   HTML markup is allowed in information about the bulk discount offer in Product Description. **New in 2.1**
-*   Bulk Discount can be disabled more easily in the Product Options page. **New in 2.1**
+*   Bulk discount can or cannot be applied if a coupon code is used, depending on configuration.
+*   HTML markup is allowed in information about the bulk discount offer in Product Description.
+*   Bulk Discount can be disabled more easily in the Product Options page.
 *   Compatibility with WooCommerce 2.1. **New in 2.2**
 
 WooCommerce Bulk Discount has been localised to these languages:
 
 *   English
+*   German (translated by Andy Soiron) **New in 2.2.1**
 *   Swedish (translated by Mr3K)
 *   Portuguese (translated by João)
+*   Polish (translated by Michał) **New in 2.2.1**
 *   Czech
 
-**Check out these premium WooCommerce extensions:**
+**If you like WooCommerce Bulk Discount, please also check out these plugins:**
 
 *   <a href="http://codecanyon.net/item/woocommerce-free-gift/6144902?ref=renp">WooCommerce Free Gift</a>
 *   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561?ref=renp">WooCommerce Gift Coupons</a>
+*   <a href="http://codecanyon.net/item/woocommerce-better-stock-overview/8376601?ref=renp">WooCommerce Better Stock Overview</a>
 *   <a href="http://codecanyon.net/item/woocommerce-add-custom-quantity-to-cart/6360685?ref=renp">WooCommerce Add Custom Quantity to Cart</a>
 *   <a href="http://codecanyon.net/item/woocommerce-minute-discounts-on-crosssells/6337331?ref=renp">WooCommerce Minute Discounts on Cross-sells</a>
-*   <a href="http://codecanyon.net/item/woocommerce-better-stock-overview/8376601?ref=renp">WooCommerce Better Stock Overview</a>
 
 == Installation ==
 
@@ -146,8 +148,11 @@ Setting bulk discounts couldn't have been easier.
 
 == Changelog ==
 
+= 2.2.1 =
+* (16 Aug 2014) Added German and Polish translations.
+
 = 2.2 =
-* (22 Feb 2013) WooCommerce 2.1 compatibility issues resolved.
+* (22 Feb 2014) WooCommerce 2.1 compatibility issues resolved.
 
 = 2.1.5 =
 * (7 Dec 2013) It is now possible to disable the feature of removing bulk discounts when a coupon code is applied.
@@ -249,6 +254,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.2.1 =
+Language translation release.
 
 = 2.2 =
 Maintenance release.
