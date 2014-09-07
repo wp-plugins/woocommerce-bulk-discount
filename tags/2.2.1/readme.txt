@@ -3,7 +3,7 @@ Contributors: Rene Puchinger
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6VEQ8XXK6B3UE
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: 2.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -48,7 +48,7 @@ Here is the list of the main features:
 *   Bulk discount can or cannot be applied if a coupon code is used, depending on configuration.
 *   HTML markup is allowed in information about the bulk discount offer in Product Description.
 *   Bulk Discount can be disabled more easily in the Product Options page.
-*   Compatibility with WooCommerce 2.1. **New in 2.2**
+*   Compatibility with WooCommerce 2.1.x.
 
 WooCommerce Bulk Discount has been localised to these languages:
 
