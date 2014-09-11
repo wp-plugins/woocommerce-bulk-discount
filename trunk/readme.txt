@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 2.2.1
+Stable tag: 2.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ Apply fine-grained bulk discounts to items in the shopping cart with this WooCom
 WooCommerce Bulk Discount makes it possible to apply fine-grained bulk discounts to items in the shopping cart,
 depending on the ordered quantity and on the specific product.
 
-WooCommerce Bulk Discount is compatible with WooCommerce 2.0+ AND 2.1+.
+WooCommerce Bulk Discount is compatible with WooCommerce 2.0.x to 2.2.x.
 
 Let us examine some examples of usage.
 
@@ -48,15 +48,16 @@ Here is the list of the main features:
 *   Bulk discount can or cannot be applied if a coupon code is used, depending on configuration.
 *   HTML markup is allowed in information about the bulk discount offer in Product Description.
 *   Bulk Discount can be disabled more easily in the Product Options page.
-*   Compatibility with WooCommerce 2.1.x.
+*   Compatibility with WooCommerce 2.0.x, 2.1.x, 2.2.x. **Updated in 2.3**
 
 WooCommerce Bulk Discount has been localised to these languages:
 
 *   English
-*   German (translated by Andy Soiron) **New in 2.2.1**
+*   German (translated by Andy Soiron)
+*   Spanish (translated by Gendrith Albornoz)
 *   Swedish (translated by Mr3K)
 *   Portuguese (translated by João)
-*   Polish (translated by Michał) **New in 2.2.1**
+*   Polish (translated by Michał)
 *   Czech
 
 **If you like WooCommerce Bulk Discount, please also check out these plugins:**
