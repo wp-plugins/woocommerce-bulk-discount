@@ -260,6 +260,9 @@ Setting bulk discounts couldn't have been easier.
 
 == Upgrade Notice ==
 
+= 2.3 =
+Maintenance release.
+
 = 2.2.1 =
 Language translation release.
 
