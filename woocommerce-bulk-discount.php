@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://wordpress.org/plugins/woocommerce-bulk-discount/
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.2.1
+Version: 2.3
 Author URI: https://profiles.wordpress.org/rene-puchinger/
 License: GPL3
 
@@ -106,7 +106,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 		public function action_links( $links ) {
 
 			$plugin_links = array(
-				'<a href="' . admin_url( 'admin.php?page=woocommerce&tab=bulk_discount' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>',
+				'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=bulk_discount' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>',
 			);
 
 			return array_merge( $plugin_links, $links );
@@ -728,7 +728,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				$class = 'nav-tab';
 				if ( $this->current_tab == $name )
 					$class .= ' nav-tab-active';
-				echo '<a href="' . admin_url( 'admin.php?page=woocommerce&tab=' . $name ) . '" class="' . $class . '">' . $label . '</a>';
+				echo '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=' . $name ) . '" class="' . $class . '">' . $label . '</a>';
 			}
 
 		}
