@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Bulk Discount
 Plugin URI: http://wordpress.org/plugins/woocommerce-bulk-discount/
 Description: Apply fine-grained bulk discounts to items in the shopping cart.
 Author: Rene Puchinger
-Version: 2.3
+Version: 2.3.1
 Author URI: https://profiles.wordpress.org/rene-puchinger/
 License: GPL3
 
@@ -104,9 +104,17 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 		 * @return array
 		 */
 		public function action_links( $links ) {
+		
+			$settings_slug = 'woocommerce';
+		
+			if ( version_compare( WOOCOMMERCE_VERSION, "2.1.0" ) >= 0 ) {
+				
+				$settings_slug = 'wc-settings';			
+				
+			}
 
 			$plugin_links = array(
-				'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=bulk_discount' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>',
+				'<a href="' . admin_url( 'admin.php?page=' . $settings_slug . '&tab=bulk_discount' ) . '">' . __( 'Settings', 'woocommerce' ) . '</a>',
 			);
 
 			return array_merge( $plugin_links, $links );
@@ -723,12 +731,20 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 		 * @return void
 		 */
 		public function add_tab() {
+		
+			$settings_slug = 'woocommerce';
+		
+			if ( version_compare( WOOCOMMERCE_VERSION, "2.1.0" ) >= 0 ) {
+				
+				$settings_slug = 'wc-settings';			
+				
+			}
 
 			foreach ( $this->settings_tabs as $name => $label ) {
 				$class = 'nav-tab';
 				if ( $this->current_tab == $name )
 					$class .= ' nav-tab-active';
-				echo '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=' . $name ) . '" class="' . $class . '">' . $label . '</a>';
+				echo '<a href="' . admin_url( 'admin.php?page=' . $settings_slug . '&tab=' . $name ) . '" class="' . $class . '">' . $label . '</a>';
 			}
 
 		}

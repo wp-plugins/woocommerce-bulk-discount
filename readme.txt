@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_butt
 Tags: woocommerce, bulk, discount
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 2.3
+Stable tag: 2.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,9 +64,6 @@ WooCommerce Bulk Discount has been localised to these languages:
 
 *   <a href="http://codecanyon.net/item/woocommerce-free-gift/6144902?ref=renp">WooCommerce Free Gift</a>
 *   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561?ref=renp">WooCommerce Gift Coupons</a>
-*   <a href="http://codecanyon.net/item/woocommerce-better-stock-overview/8376601?ref=renp">WooCommerce Better Stock Overview</a>
-*   <a href="http://codecanyon.net/item/woocommerce-add-custom-quantity-to-cart/6360685?ref=renp">WooCommerce Add Custom Quantity to Cart</a>
-*   <a href="http://codecanyon.net/item/woocommerce-minute-discounts-on-crosssells/6337331?ref=renp">WooCommerce Minute Discounts on Cross-sells</a>
 
 == Installation ==
 
@@ -148,6 +145,9 @@ Setting bulk discounts couldn't have been easier.
 6. Example of percentage bulk discount visibility on the cart page.
 
 == Changelog ==
+
+= 2.3.1 =
+* (28 Sep 2014) Bugfix - settings tab was not working in WooCommerce 2.0.x
 
 = 2.3 =
 * (11 Sep 2014) Compatibility issues with WooCommerce 2.2 resolved.
@@ -259,6 +259,9 @@ Setting bulk discounts couldn't have been easier.
 * Initial version.
 
 == Upgrade Notice ==
+
+= 2.3.1 =
+Bugfix release.
 
 = 2.3 =
 Maintenance release.
