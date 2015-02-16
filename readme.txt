@@ -16,6 +16,7 @@ WooCommerce Bulk Discount makes it possible to apply fine-grained bulk discounts
 depending on the ordered quantity and on the specific product.
 
 WooCommerce Bulk Discount is compatible with WooCommerce 2.0.x to 2.2.x.
+**Warning: This extension doesn't currently support WooCommerce 2.3.x.**
 
 Let us examine some examples of usage.
 
