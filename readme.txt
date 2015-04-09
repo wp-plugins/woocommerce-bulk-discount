@@ -48,7 +48,7 @@ Here is the list of the main features:
 *   Bulk discount can or cannot be applied if a coupon code is used, depending on configuration.
 *   HTML markup is allowed in information about the bulk discount offer in Product Description.
 *   Bulk Discount can be disabled more easily in the Product Options page.
-*   Compatibility with WooCommerce 2.0.x, 2.1.x, 2.2.x.
+*   Compatibility with WooCommerce 2.0.x to 2.3.x.
 
 WooCommerce Bulk Discount has been localised to these languages:
 
@@ -64,6 +64,7 @@ WooCommerce Bulk Discount has been localised to these languages:
 
 *   <a href="http://codecanyon.net/item/woocommerce-free-gift/6144902?ref=renp">WooCommerce Free Gift</a>
 *   <a href="http://codecanyon.net/item/woocommerce-gift-coupons/6207561?ref=renp">WooCommerce Gift Coupons</a>
+*   <a href="http://codecanyon.net/item/woocommerce-out-of-stock-warning/11038795">WooCommerce Out of Stock Warning</a>
 
 == Installation ==
 
