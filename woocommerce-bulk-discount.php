@@ -74,7 +74,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 			if ( get_option( 'woocommerce_t4m_enable_bulk_discounts', 'yes' ) == 'yes' ) {
 
 				add_action( 'woocommerce_before_calculate_totals', array( $this, 'action_before_calculate' ), 10, 1 );
-				add_action( 'woocommerce_calculate_totals', array( $this, 'action_after_calculate' ), 10, 1 );
+//				add_action( 'woocommerce_calculate_totals', array( $this, 'action_after_calculate' ), 10, 1 );
 				add_action( 'woocommerce_before_cart_table', array( $this, 'before_cart_table' ) );
 				add_action( 'woocommerce_single_product_summary', array( $this, 'single_product_summary' ), 45 );
 				add_filter( 'woocommerce_cart_item_subtotal', array( $this, 'filter_subtotal_price' ), 10, 2 );
@@ -83,7 +83,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 				add_filter( 'woocommerce_product_write_panel_tabs', array( $this, 'action_product_write_panel_tabs' ) );
 				add_filter( 'woocommerce_product_write_panels', array( $this, 'action_product_write_panels' ) );
 				add_action( 'woocommerce_process_product_meta', array( $this, 'action_process_meta' ) );
-				add_filter( 'woocommerce_cart_product_subtotal', array( $this, 'filter_cart_product_subtotal' ), 10, 3 );
+//				add_filter( 'woocommerce_cart_product_subtotal', array( $this, 'filter_cart_product_subtotal' ), 10, 3 );
 				add_action( 'woocommerce_checkout_update_order_meta', array( $this, 'order_update_meta' ) );
 
 				if ( version_compare( WOOCOMMERCE_VERSION, "2.1.0" ) >= 0 ) {
@@ -192,7 +192,7 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 			$new_css = esc_attr( get_option( 'woocommerce_t4m_css_new_price', 'color: #4AB915; font-weight: bold;' ) );
 			return "<span class='discount-info' title='" . sprintf( __( '%s%% bulk discount applied!', 'wc_bulk_discount' ), round( ( 1.0 - $coeff ) * 100.0, 2 ) ) . "'>" .
 			"<span class='old-price' style='$old_css'>$oldprice</span>" .
-			"<span class='new-price' style='$new_css'>$discprice</span></span>";
+			"<span class='new-price' style='$new_css'>$price</span></span>";
 
 		}
 
