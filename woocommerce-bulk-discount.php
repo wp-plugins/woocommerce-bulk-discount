@@ -516,9 +516,10 @@ if ( !class_exists( 'Woo_Bulk_Discount_Plugin_t4m' ) ) {
 
 			global $thepostid, $post;
 			if ( !$thepostid ) $thepostid = $post->ID;
-
+			$discounts = get_post_meta( $thepostid, '_bulkdiscount_text_info', true );
+			if( empty($discounts) ) return;
 			echo "<div class='productinfo-show-discounts'>";
-			echo get_post_meta( $thepostid, '_bulkdiscount_text_info', true );
+			echo $discounts;
 			echo "</div>";
 
 		}
